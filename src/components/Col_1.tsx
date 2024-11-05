@@ -1,9 +1,8 @@
-// import { Image } from 'next/image';
-import news1 from "../../../../public/images/newsmain1.svg";
-import news2 from "../../../../public/images/newsmain2.svg";
-import news3 from "../../../../public/images/newsmain3.svg";
+import news1 from "../../public/images/newsmain1.svg";
+import news2 from "../../public/images/newsmain2.svg";
+import news3 from "../../public/images/newsmain3.svg";
 import Image from "next/image";
-const MainNews = () => {
+const Col_1 = () => {
   const newsItems = [
     {
       imgSrc: news1,
@@ -25,26 +24,28 @@ const MainNews = () => {
     },
   ];
   return (
-    <div className="pb-32">
-      <div className="flex flex-col items-center space-y-6 gap-5">
-        {newsItems.map((item, index) => (
-          <div
-            key={index}
-            className="w-[360px] h-[340px] max-w-md bg-white rounded-md overflow-hidden shadow-md"
-          >
-            <Image
-              src={item.imgSrc}
-              alt={item.altText}
-              width={400}
-              height={250}
-              className="w-full h-auto"
-            />
-            <p className="p-4 text-gray-800 text-sm">{item.description}</p>
-          </div>
-        ))}
+    <div>
+      <div className="p-5">
+        <div className="flex flex-col items-center space-y-6 gap-5">
+          {newsItems.map((item, index) => (
+            <div
+              key={index}
+              className="w-[360px] h-[340px] max-w-md bg-white rounded-md overflow-hidden shadow-md hover:filter hover:grayscale"
+            >
+              <Image
+                src={item.imgSrc}
+                alt={item.altText}
+                width={400}
+                height={250}
+                className="w-full h-auto"
+              />
+              <p className="p-4 text-gray-800 text-sm">{item.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default MainNews;
+export default Col_1;
