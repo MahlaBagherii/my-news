@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-
-const irSans = localFont({
-  src: "./fonts/irSans.woff",
-  variable: "--irSans",
+const iranYekan = localFont({
+  src: "./fonts/iranYekan.woff",
+  variable: "--iranYekan",
   weight: "100 900",
 });
 
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }) {
   return (
     <html dir="rtl" lang="fa">
-      <body className={`${irSans.variable} antialiased`}>
+      <body className={`${iranYekan.variable} antialiased`}>
        
         {children}
       </body>

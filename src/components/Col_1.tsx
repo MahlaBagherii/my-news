@@ -26,11 +26,11 @@ const Col_1 = () => {
   return (
     <div>
       <div className="p-5">
-        <div className="flex flex-col items-center space-y-6 gap-5">
+        <div className="flex flex-col items-center space-y-2">
           {newsItems.map((item, index) => (
             <div
               key={index}
-              className="w-[360px] h-[340px] max-w-md bg-white rounded-md overflow-hidden shadow-md hover:filter hover:grayscale"
+              className="w-[360px] h-[340px] max-w-md bg-white rounded-md overflow-hidden hover:filter hover:grayscale"
             >
               <Image
                 src={item.imgSrc}

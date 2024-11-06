@@ -4,19 +4,19 @@ import logo from "../../public/images/logo.svg";
 import news1 from "../../public/images/news1.svg";
 
 const Header = () => {
-    const links = [
-        { title: "صفحه اصلی", href: "/" },
-        { title: "دانش و فن آوری", href: "#" },
-        { title: "جامعه", href: "#" },
-        { title: "سلامت", href: "#" },
-        { title: "فرهنگ", href: "#" },
-        { title: "ورزش", href: "#" },
-        { title: "اقتصاد", href: "#" },
-        { title: "سیاست", href: "#" },
-        { title: "جهان", href: "#" },
-        { title: "بیشتر ▼", href: "/" }
-      ];
-    
+  const links = [
+    { title: "صفحه اصلی", href: "/" },
+    { title: "دانش و فن آوری", href: "#" },
+    { title: "جامعه", href: "#" },
+    { title: "سلامت", href: "#" },
+    { title: "فرهنگ", href: "#" },
+    { title: "ورزش", href: "#" },
+    { title: "اقتصاد", href: "#" },
+    { title: "سیاست", href: "#" },
+    { title: "جهان", href: "#" },
+    { title: "بیشتر ▼", href: "/" },
+  ];
+
   return (
     <div className="bg-white text-black ">
       <div className="flex justify-between items-center px-4 py-2 border-b border-gray-800">
@@ -42,12 +42,19 @@ const Header = () => {
         </div>
       </div>
       <div className="flex space-x-8 pr-10 py-4 bg-black text-white justify-start w-full h-[47px]">
-      {links.map((link, index) => (
-        <Link key={index} href={link.href} className="text-sm hover:text-[#ff4b48] ml-6">
-          {link.title}
-        </Link>
-      ))}
-    </div>
+        {links.map((link, index) => (
+          <Link
+            key={index}
+            href={link.href}
+            className="text-sm hover:text-[#ff4b48] ml-6"
+          >
+            {link.title}
+          </Link>
+        ))}
+      </div>
+      <div className="h-[37px] w-full bg-[#1D1D1D]">
+        <p className="text-white text-[12px]"><span className="text-lg text-white pr-10">●</span>خبرهای هواشناسی و نرخ ارز و خبر های فوری یا گزارش لحظه به لحظه حوادث لایو یا نتایج انتخابات</p>
+      </div>
       {/* <div className="flex justify-between">
         <section className="col-span-2">
           <h1 className="text-xl font-bold mb-4">خبر اصلی</h1>
