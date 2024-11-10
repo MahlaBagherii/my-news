@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
-body {
-  font-family: "iranYekan.woff";
+@font-face{
+  font-family: "iranYekan";
+  src : url(".././app/fonts/iranYekan.woff")
+  format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
