@@ -10,7 +10,7 @@ const Header = () => {
     { title: "جامعه", href: "#" },
     { title: "سلامت", href: "#" },
     { title: "فرهنگ", href: "#" },
-    { title: "ورزش", href: "#" },
+    { title: "ورزش", href: "/exercise" },
     { title: "اقتصاد", href: "#" },
     { title: "سیاست", href: "#" },
     { title: "جهان", href: "#" },
@@ -55,28 +55,6 @@ const Header = () => {
       <div className="h-[37px] w-full bg-[#1D1D1D]">
         <p className="text-white text-[12px]"><span className="text-lg text-white pr-10">●</span>خبرهای هواشناسی و نرخ ارز و خبر های فوری یا گزارش لحظه به لحظه حوادث لایو یا نتایج انتخابات</p>
       </div>
-      {/* <div className="flex justify-between">
-        <section className="col-span-2">
-          <h1 className="text-xl font-bold mb-4">خبر اصلی</h1>
-          <div className="bg-white p-4 border rounded-lg">
-            <p>
-              قبل از اینکه بایدن بتواند اوکراین را نجات دهد، باید از نشست ناتو
-              برای نجات خود استفاده کند.
-            </p>
-            <Image
-              src={news1}
-              alt="main-news"
-              width={500}
-              height={300}
-              className="mt-4"
-            />
-          </div>
-        </section>
-
-        <div className="flex gap-6 p-3">
-          
-        </div>
-      </div> */}
     </div>
   );
 };
