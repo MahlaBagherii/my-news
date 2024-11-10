@@ -10,7 +10,7 @@ const Header = () => {
     { title: "جامعه", href: "#" },
     { title: "سلامت", href: "#" },
     { title: "فرهنگ", href: "#" },
-    { title: "ورزش", href: "#" },
+    { title: "ورزش", href: "/exercies" },
     { title: "اقتصاد", href: "#" },
     { title: "سیاست", href: "#" },
     { title: "جهان", href: "#" },
