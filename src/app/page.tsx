@@ -5,6 +5,8 @@ import HomePage from "../container/HomePage";
 import Advertising from "../container/Advertising";
 import Category from "../container/Category";
 import Advertising_2 from "../container/Advertising_2";
+import Slider from "../components/Slider";
+
 export default function Home() {
   return (
     <div>
@@ -12,7 +14,9 @@ export default function Home() {
       <HomePage />
       <Advertising />
       <Category />
-      <Advertising_2/>
+      <Slider />
+      <Category />
+      <Advertising_2 />
       <Footer />
     </div>
   );
