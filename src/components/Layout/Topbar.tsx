@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Topbar() {
   return (
     <div className="flex items-center justify-between rounded-md px-4 py-2 mx-4 mt-6">

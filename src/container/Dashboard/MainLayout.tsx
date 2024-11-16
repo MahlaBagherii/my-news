@@ -1,5 +1,3 @@
-import Sidebar from "../../components/Layout/Sidebar";
-import Topbar from "../../components/Layout/Topbar";
 import { FaEdit, FaTrashAlt, FaPlus, FaSearch } from "react-icons/fa";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {

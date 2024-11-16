@@ -1,6 +1,5 @@
-import React from "react";
 import Sidebar from "../../components/Layout/Sidebar";
-import MainLayout from "./MainLayout";
+import MainLayout from "../../container/Dashboard/MainLayout";
 import Topbar from "../../components/Layout/Topbar";
 export default function page() {
   return (
