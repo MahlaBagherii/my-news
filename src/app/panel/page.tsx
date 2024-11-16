@@ -1,15 +1,21 @@
-import SideImageLayout from "../../components/Layout/SideImageLayout";
+import MainLayout from "../subtitle/MainLayout";
+import SideImageLayout from "../login/SideImageLayout";
+import Sidebar from "../../components/Layout/Sidebar";
+import Topbar from "../../components/Layout/Topbar";
+import DataTable from "../../components/Table/DataTable";
 import LoginForm from "../../container/Auth/LoginForm";
+import DashboardPage from "../../container/Dashboard/DashboardPage";
 
 const page = () => {
   return (
-    <div className="flex h-screen">
-      <div className="w-[50%]">
-        <SideImageLayout />
-      </div>
-      <div className="w-[50%] flex items-center justify-center">
-        <LoginForm />
-      </div>
+    <div>
+      <DashboardPage />
+      <DataTable />
+      {/* <LoginForm/> */}
+      {/* <MainLayout/> */}
+      {/* <SideImageLayout/> '' */}
+      <Sidebar />
+      <Topbar />
     </div>
   );
 };

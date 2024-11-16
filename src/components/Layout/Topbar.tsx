@@ -1,23 +1,28 @@
-// import { FaBell } from "react-icons/fa";
+import React from "react";
 
-const Topbar = () => {
+export default function Topbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 bg-gray-100 shadow-md py-4 px-6 flex justify-between items-center z-10">
-      <div className="relative">
-        <FaBell className="text-gray-500 text-xl" />
-        <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">1</span>
-      </div>
-
-      <div className="flex items-center bg-white p-2 rounded-lg shadow space-x-4">
-        <img src="/path/to/user-image.jpg" alt="User Profile" className="w-10 h-10 rounded-full" />
-        <div className="text-right">
-          <h3 className="text-sm font-semibold text-gray-700">مسعود عزیز خوش آمدی</h3>
-          <p className="text-xs text-gray-500">ادمین</p>
+    <div className="flex items-center justify-between rounded-md px-4 py-2 mx-4 mt-6">
+      <div className=" bg-white flex items-center w-[261px] h-[80px] shadow-md rounded-[20px_40px_40px_20px] p-4 mb-4">
+        <img
+          src="/images/cat.jpg"
+          alt="کاربر"
+          className="w-12 h-12 rounded-full ml-4"
+        />
+        <div className="flex-1 text-right">
+          <p className="font-bold text-[#4F4F4F]">پیشی عزیز خوش آمدی</p>
+          <p className="text-sm text-[#828282]">ادمین</p>
         </div>
       </div>
-    </header>
+      <div className=" flex justify-center items-center bg-[#ffffff] w-[50px] h-[49] gap-8 rounded-[999px]">
+        <div className="w-[46px] h-[46px] flex justify-center items-center">
+          <img
+            src="/icons/notification.svg"
+            alt="Notification Icon"
+            className="w-[24px] h-[24px] flex justify-center items-center"
+          />
+        </div>
+      </div>
+    </div>
   );
-
-};
-
-export default Topbar;
+}
