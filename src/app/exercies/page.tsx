@@ -3,6 +3,7 @@ import Link from "next/link";
 import Sport from "../../container/Sport";
 import Slider from "../../components/Slider";
 import LatestTitles from "../../container/LatestTitles";
+import Footer from "../../components/footer";
 
 const page = () => {
   return (
@@ -12,6 +13,8 @@ const page = () => {
         <Sport />
         <Slider />
         <LatestTitles/>
+        <Footer/>
+
       </div>
     </div>
   );

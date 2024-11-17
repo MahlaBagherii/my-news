@@ -33,11 +33,13 @@ const Header = () => {
           </Link>
         </div>
         <div className="flex items-center px-3">
+          <Link href="/search">
           <input
             type="text"
             placeholder="کلید واژه خود را جستجو کنید"
             className="bg-gray-100 text-sm w-48 py-2 rounded-md focus:outline-none text-center"
           />
+          </Link>
           <button className="text-black pr-5">تا ▼</button>
         </div>
       </div>
@@ -52,9 +54,7 @@ const Header = () => {
           </Link>
         ))}
       </div>
-      <div className="h-[37px] w-full bg-[#1D1D1D]">
-        <p className="text-white text-[12px]"><span className="text-lg text-white pr-10">●</span>خبرهای هواشناسی و نرخ ارز و خبر های فوری یا گزارش لحظه به لحظه حوادث لایو یا نتایج انتخابات</p>
-      </div>
+   
       {/* <div className="flex justify-between">
         <section className="col-span-2">
           <h1 className="text-xl font-bold mb-4">خبر اصلی</h1>

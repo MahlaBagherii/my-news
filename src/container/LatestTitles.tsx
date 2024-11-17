@@ -7,7 +7,6 @@ const LatestTitles = () => {
     <div className="flex flex-col gap-6">
       <Sport_4/>
       <Advertising_3/>
-      <Footer/>
     </div>
   )
 }
