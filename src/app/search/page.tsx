@@ -38,7 +38,7 @@ const Search = () => {
           <button className="bg-[#FF0C0C] text-white py-2 px-4 rounded-lg shadow-md h-[40px] w-[120px] ">
             اخبار امروز
           </button>
-        </div>
+        </div>  
       </div>
       <div className="flex flex-col gap-5 pt-10">
       <Sport_4/>

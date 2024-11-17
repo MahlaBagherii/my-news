@@ -79,11 +79,11 @@ const Footer = () => {
         </div>
 
         <div className="w-full flex items-center justify-center p-10">
-          <div className=" flex justify-center items-center mt-6 mb-10 border border-[#FF0C0C] w-[493px] h-[56px] bg-[#282828]">
+          <div className=" flex justify-center gap-10 mt-6 mb-10 border border-[#FF0C0C] w-[493px] h-[56px] bg-[#282828]">
             <input
               type="text"
               placeholder="کلید واژه خود را جستجو کنید"
-              className="text-sm text-white bg-[#282828]  rounded-l-lg focus:outline-none"
+              className="text-sm text-white bg-[#282828]  rounded-l-lg focus:outline-none w-full p-5"
             />
             <button className="rounded-r-lg px-4 py-2">🔍</button>
           </div>
