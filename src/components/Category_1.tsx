@@ -5,6 +5,7 @@ import men from "../../public/images/men.svg";
 import women from "../../public/images/women.svg";
 
 import Image from "next/image";
+import Category_3 from "./Category_3";
 
 const Category_1 = () => {
   const newsData = [
@@ -56,27 +57,7 @@ const Category_1 = () => {
         </div>
         <Image src={teramp1.src} alt="Main Article" width={433} height={196} />
       </div>
-      <div className="container mx-auto ">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {newsData.map((news, index) => (
-            <div
-              key={index}
-              className="p-4 bg-white  border-b border-[#282828] flex flex-col"
-            >
-              <div className="relative h-[138px] w-[173px] mb-4">
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  objectFit="cover"
-                />
-              </div>
-              <h3 className="font-bold text-md mb-2">{news.title}</h3>
-              <p className="text-gray-600 text-sm mb-4">{news.description}</p>
-              <p className="text-gray-500 text-xs">{news.date}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Category_3/>
     </div>
   );
 };
