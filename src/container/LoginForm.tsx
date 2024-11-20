@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
           >
             <p>رمز عبور</p>
             <div className="flex items-center justify-between">
-              <a href="#" className="text-sm text-gray-500 mt-2">
+              <a href="#" className="text-sm text-gray-500 mt-2 mb-2">
                 فراموشی رمز !
               </a>
             </div>
