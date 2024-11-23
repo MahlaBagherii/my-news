@@ -11,7 +11,7 @@ const layout = ({ children }) => {
       </div>
 
       <div className="flex flex-col w-[82%] h-full px-4 py-4">
-        <div className="h-[300px] w-full mb-4">
+        <div className="h-[300px] w-full  ">
           <Topbar />
         </div>
 

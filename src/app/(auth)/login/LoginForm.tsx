@@ -1,15 +1,23 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
+  const router = useRouter(); 
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // لاجیک ورودی
-    // console.log({ username, password, rememberMe });
+
+    if (username && password) {
+      console.log("Login successful!");
+      router.push("/panel/dashboard"); 
+    } else {
+      console.error("Please enter both username and password");
+    }
   };
 
   return (
@@ -52,9 +60,12 @@ const LoginForm: React.FC = () => {
           >
             <p>رمز عبور</p>
             <div className="flex items-center justify-between">
-              <a href="#" className="text-sm text-gray-500 mt-2 mb-2">
+              <Link
+                href="/forgotPassword"
+                className="text-sm text-gray-500 mt-2 mb-2"
+              >
                 فراموشی رمز !
-              </a>
+              </Link>
             </div>
           </label>
           <input

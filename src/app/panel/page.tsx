@@ -1,11 +1,5 @@
-import Dashboard from "../../container/Dashboard";
-
 const page = () => {
-  return (
-    <div>
-      <Dashboard /> 
-    </div>
-  );
+  return <div></div>;
 };
 
 export default page;

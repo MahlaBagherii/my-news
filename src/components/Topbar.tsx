@@ -1,6 +1,6 @@
 export default function Topbar() {
   return (
-    <div className="flex items-center justify-between rounded-md px-4 py-2 mx-4 mt-6  ">
+    <div className="flex items-center justify-between rounded-md px-4 py-2 mx-4  ">
       <div className=" bg-white flex items-center w-[261px] h-[80px] shadow-md rounded-[20px_40px_40px_20px] p-4 mb-4">
         <img
           src="/images/cat.jpg"

@@ -1,18 +1,26 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
   const [username, setUsername] = useState<string>("");
+  const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSendCode = (e: React.FormEvent) => {
     e.preventDefault();
+    if (username.trim() === "") {
+      alert("لطفاً شماره موبایل خود را وارد کنید.");
+      return;
+    }
+
     console.log("Username:", username);
+    router.push("/code");
   };
 
   return (
     <div className="w-full max-w-md mx-auto mt-10 p-6 bg-white rounded-lg">
-      <div className="flex flex-col items-center mb-24">
+      <div className="flex flex-col items-center mb-16">
         <img
           src="/icons/Group 31.svg"
           alt="Tree News"
@@ -23,7 +31,7 @@ export default function ForgotPassword() {
         <h2 className="text-xl font-bold text-gray-800">Tree news</h2>
       </div>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSendCode}>
         <div>
           <label htmlFor="username" className="block text-right text-gray-700">
             موبایل
@@ -33,7 +41,8 @@ export default function ForgotPassword() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300  rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
+            className="w-full px-4 py-2 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
+            placeholder="مثال: 746****0937"
           />
         </div>
         <button

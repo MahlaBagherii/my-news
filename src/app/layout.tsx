@@ -17,7 +17,6 @@ export default function RootLayout({ children }) {
   return (
     <html dir="rtl" lang="fa">
       <body style={{ fontFamily: "iranYekan" }}>
-       
         {children}
       </body>
     </html>

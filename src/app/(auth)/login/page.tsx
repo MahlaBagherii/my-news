@@ -1,8 +1,6 @@
-import { Children } from "react";
-import LoginForm from "../../../container/LoginForm";
-import ForgetPassword from "../../../container/ForgetPassword";
+import LoginForm from "./LoginForm";
 
-const Login = () => {
+const SideImage = () => {
   return (
     <div className="flex w-full flex-row-reverse md:flex-row-reverse h-screen overflow-hidden ">
       <div className="w-[35%] flex items-center justify-center relative bg-[#500C0B] overflow-hidden">
@@ -28,10 +26,9 @@ const Login = () => {
       </div>
       <div className="flex-1 flex items-center justify-center p-8 md:p-0"></div>
       <div className="w-[65%] h-full flex justify-center items-center">
-          <LoginForm />
-        {/* <ForgetPassword /> */}
+        <LoginForm />
       </div>
     </div>
   );
 };
-export default Login;
+export default SideImage;
