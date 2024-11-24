@@ -1,8 +1,6 @@
 import Image from "next/image";
-import { FaEdit, FaTrashAlt, FaPlus } from "react-icons/fa";
 
 const Dashboard = () => {
-  // داده‌های فیک
   const fakeNews = [
     {
       id: 1,
@@ -35,7 +33,6 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-3 flex-row-reverse   ">
             <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
-              <FaPlus className="w-5 h-5" />
               افزودن خبر
             </button>
 
@@ -60,9 +57,12 @@ const Dashboard = () => {
               </span>
               <select className="border rounded-[5px]  pr-4 ml-14 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
                 <option value="default">انتخاب دسته</option>
-                <option value="top">بالا</option>
-                <option value="middle">وسط</option>
-                <option value="bottom">پایین</option>
+                <option value="top">ورزش</option>
+                <option value="middle">اقتصاد</option>
+                <option value="bottom">ایران</option>
+                <option value="middle">جهان</option>
+                <option value="bottom">سیاست</option>
+                <option value="middle">فرهنگ</option>
               </select>
             </div>
 
@@ -76,9 +76,12 @@ const Dashboard = () => {
               </span>
               <select className="border rounded-[5px] pl-10 pr-4 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
                 <option value="default">موقعیت نمایش</option>
-                <option value="politics">سیاسی</option>
-                <option value="sports">ورزشی</option>
-                <option value="technology">فناوری</option>
+                <option value="politics">بدون برچسب</option>
+                <option value="sports">ویژه اصلی 1</option>
+                <option value="technology">ویژه اصلی 2</option>
+                <option value="politics">برگزیده اصلی </option>
+                <option value="sports">ویژه دسته 1</option>
+                <option value="technology">ویژه دسته 2</option>
               </select>
             </div>
           </div>

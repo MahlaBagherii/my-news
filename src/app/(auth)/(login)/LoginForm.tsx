@@ -7,19 +7,18 @@ const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [rememberMe, setRememberMe] = useState<boolean>(false);
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (username && password) {
       console.log("Login successful!");
-      router.push("/panel/dashboard"); 
+      router.push("/panel/dashboard");
     } else {
       console.error("Please enter both username and password");
     }
   };
-
   return (
     <div className="w-full max-w-md mx-auto mt-10 p-6 bg-white rounded-lg">
       <div className="flex flex-col items-center mb-16">
@@ -39,7 +38,6 @@ const LoginForm: React.FC = () => {
         </span>
         <div className="flex-1 border-t border-gray-300"></div>
       </div>
-
       <form onSubmit={handleLogin} className="space-y-4 mb-20">
         <div>
           <label htmlFor="username" className="block text-right text-gray-700">
@@ -61,7 +59,7 @@ const LoginForm: React.FC = () => {
             <p>رمز عبور</p>
             <div className="flex items-center justify-between">
               <Link
-                href="/forgotPassword"
+                href="/forgetPassword"
                 className="text-sm text-gray-500 mt-2 mb-2"
               >
                 فراموشی رمز !
@@ -76,7 +74,6 @@ const LoginForm: React.FC = () => {
             className="w-full px-4 py-2 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mb-6"
           />
         </div>
-
         <button
           type="submit"
           className="w-full py-2 text-white bg-[#AC2043] transition rounded-[15px] "
@@ -102,5 +99,4 @@ const LoginForm: React.FC = () => {
     </div>
   );
 };
-
 export default LoginForm;

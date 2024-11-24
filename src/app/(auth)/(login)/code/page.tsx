@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 export default function Code() {
-  const [username, setUsername] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("");
   const [otp, setOtp] = useState<string[]>(Array(5).fill(""));
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Username:", username);
+    console.log("mobile:", mobile);
     console.log("OTP:", otp.join(""));
 
     router.push("/resetPassword");
@@ -48,8 +48,8 @@ export default function Code() {
           <input
             type="text"
             id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
             placeholder="مثال: 746****0937"
           />

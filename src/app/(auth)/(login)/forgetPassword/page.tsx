@@ -19,7 +19,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto mt-10 p-6 bg-white rounded-lg">
+    <div className="w-[500px] mt-10 p-6 bg-re rounded-lg">
       <div className="flex flex-col items-center mb-16">
         <img
           src="/icons/Group 31.svg"
@@ -41,7 +41,7 @@ export default function ForgotPassword() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
+            className="w-full px-4 py-3 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
             placeholder="مثال: 746****0937"
           />
         </div>

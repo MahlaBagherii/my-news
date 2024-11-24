@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }) {
   return (
     <html dir="rtl" lang="fa">
-      <body style={{ fontFamily: "iranYekan" }}>
+      <body style={{ fontFamily: "iranYekan" }} className="">
         {children}
       </body>
     </html>

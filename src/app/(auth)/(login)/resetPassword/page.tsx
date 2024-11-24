@@ -20,7 +20,6 @@ export default function ResetPassword() {
       console.error("Passwords do not match!");
     }
   };
-
   return (
     <div className="w-full max-w-md mx-auto mt-10 p-6 bg-white rounded-lg">
       <div className="flex flex-col items-center mb-24">
@@ -64,7 +63,6 @@ export default function ResetPassword() {
             />
           </div>
         </div>
-
         <div className="relative">
           <label
             htmlFor="confirmPassword"
@@ -88,7 +86,6 @@ export default function ResetPassword() {
             />
           </div>
         </div>
-
         <button
           type="submit"
           className="w-full py-2 text-white bg-[#AC2043] transition rounded-[15px] mt-10"
