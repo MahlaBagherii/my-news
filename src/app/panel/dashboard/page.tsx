@@ -31,8 +31,9 @@ const Dashboard = () => {
         <div className="flex items-center justify-between px-6 mt-2 ">
           <h1 className="text-lg font-bold text-gray-700">مدیریت اخبار</h1>
 
-          <div className="flex items-center gap-3 flex-row-reverse   ">
+          <div className="flex items-center gap-3 flex-row-reverse ">
             <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+              <img src="/icons/plus.svg" alt="Search" />
               افزودن خبر
             </button>
 
