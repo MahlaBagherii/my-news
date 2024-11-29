@@ -15,7 +15,7 @@ export default function ResetPassword() {
     e.preventDefault();
     if (newPassword === confirmPassword) {
       console.log("Password reset successfully!");
-      router.push("/panel/dashboard"); // Redirect to dashboard
+      router.push("/panel/dashboard"); 
     } else {
       console.error("Passwords do not match!");
     }

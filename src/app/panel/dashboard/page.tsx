@@ -33,6 +33,7 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-3 flex-row-reverse   ">
             <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+            <img src="/icons/plus.svg" alt="plus " />
               افزودن خبر
             </button>
 
@@ -88,7 +89,7 @@ const Dashboard = () => {
         </div>
 
         <div className="overflow-x-auto mx-4 mt-4 ">
-          <table className="w-full bg-white  shadow-md overflow-hidden  ">
+          <div className="w-full bg-white  shadow-md overflow-hidden  ">
             <div className="bg-[#AC2043] text-white rounded-[10px] w-[1103px] flex ">
               <p className="py-3 px-4 text-right ">ردیف</p>
               <p className="py-3 px-24 text-right mr-[100px] ">عنوان خبر</p>
@@ -145,7 +146,7 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-          </table>
+          </div>
         </div>
       </div>
     </div>
