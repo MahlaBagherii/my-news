@@ -33,6 +33,8 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-3 flex-row-reverse   ">
             <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+            <img src="/icons/plus.svg" alt="plus " />
+
               افزودن خبر
             </button>
 
