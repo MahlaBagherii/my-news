@@ -42,7 +42,6 @@ export default function ForgotPassword() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-[15px] focus:outline-none focus:ring-2 focus:ring-red-500 mt-2"
-            placeholder="مثال: 746****0937"
           />
         </div>
         <button
