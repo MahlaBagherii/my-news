@@ -48,7 +48,7 @@ const page = () => {
         </div>
 
         <div className="overflow-x-auto mx-4 mt-6">
-          <table className="w-full bg-white  shadow-md overflow-hidden  ">
+          <div className="w-full bg-white  shadow-md overflow-hidden  ">
             <div className="bg-[#AC2043] text-white rounded-[10px] w-[1103px] flex ">
               <p className="py-3 px-4 text-right ">ردیف</p>
               <p className="py-3 px-24 text-right mr-[100px] ">عنوان زیرنویس</p>
@@ -85,7 +85,7 @@ const page = () => {
                 </div>
               ))}
             </div>
-          </table>
+          </div>
         </div>
       </div>
     </div>
