@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Image from "next/image";
 
 const page = () => {
   const fakeNews = [
@@ -89,6 +90,7 @@ const page = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default page;
+  )
+}
+
+export default page
