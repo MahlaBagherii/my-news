@@ -17,7 +17,7 @@ const Sidebar = () => {
       <p className="border-t border-[#EB5757] w-[193px] mt-[9.5px] " />
 
       <nav className="flex flex-col space-y-4 text-right text-black justify-around h-[358px] w-[161px] gap[14px] pr-5 mt-[46px] ">
-        <Link href="/panel/add-management">
+        <Link href="/panel/user-lists">
           <div className="flex h-[45px] w-[161px] items-center gap-2">
             <Image
               src="/icons/user.svg"
@@ -39,7 +39,7 @@ const Sidebar = () => {
             <span className="mr-2">دسته بندی ها</span>
           </div>
         </Link>
-        <Link href="/panel/add-management">
+        <Link href="/panel/subtitle">
           <div className="flex h-[45px] w-[161px]  items-center gap-2">
             <Image
               src="/icons/subtitle.svg"
@@ -50,7 +50,7 @@ const Sidebar = () => {
             <span>اخبار زیرنویس</span>
           </div>
         </Link>
-        <Link href="/panel/add-management">
+        <Link href="/panel/ads-management">
           <div className="flex h-[45px] w-[161px] items-center gap-2">
             <Image
               src="/icons/presention-chart.svg"
@@ -72,7 +72,7 @@ const Sidebar = () => {
             <span>تنظیمات</span>
           </div>
         </Link>
-        <Link href="/panel/user-lists">
+        <Link href="/panel/visit-statistics">
           <div className="flex h-[45px] w-[161px] items-center gap-2">
             <Image
               src="/icons/status.svg"
