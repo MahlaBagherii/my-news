@@ -1,13 +1,10 @@
 import MainLayout from "../../../components/MainLayout";
+import TextEditor from "../../../container/TextEditor";
 
 export default function AddNews() {
   return (
-    <div className="bg-white rounded-[20px] h-[1000%]">
+    <div className="bg-white rounded-[20px]">
       <div className="p-4">
-
-
-
-
         <div className="">
           <div className="w-[114px] h-[26px] ml-[1013px]">
             <h1>افزودن خبر جدید</h1>
@@ -38,10 +35,6 @@ export default function AddNews() {
             <div className="bg-slate-600 ">fvsf</div>
           </div> */}
         </div>
-
-
-
-
 
         <div className="flex mr-[82px]">
           <div className="relative w-[135px] h-[50px] ml-[50px] ">
@@ -108,6 +101,7 @@ export default function AddNews() {
           </div>
         </div>
       </div>
+      <TextEditor />
     </div>
   );
 }

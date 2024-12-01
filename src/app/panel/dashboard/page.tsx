@@ -1,6 +1,9 @@
-import Image from "next/image";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const router = useRouter();
   const fakeNews = [
     {
       id: 1,
@@ -24,7 +27,9 @@ const Dashboard = () => {
       status: true
     }
   ];
-
+  const handleAddNews = () => {
+    router.push("/panel/add-news");
+  };
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
@@ -32,9 +37,11 @@ const Dashboard = () => {
           <h1 className="text-lg font-bold text-gray-700">مدیریت اخبار</h1>
 
           <div className="flex items-center gap-3 flex-row-reverse   ">
-            <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
-            <img src="/icons/plus.svg" alt="plus " />
-
+            <button
+              className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
+              onClick={handleAddNews}
+            >
+              <img src="/icons/plus.svg" alt="plus " />
               افزودن خبر
             </button>
 
@@ -153,5 +160,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard;
