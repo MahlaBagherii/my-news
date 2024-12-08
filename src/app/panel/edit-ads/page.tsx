@@ -1,12 +1,10 @@
-import MainLayout from "../../../components/MainLayout";
-
 export default function EditAds() {
   return (
     <div className="bg-white rounded-[20px]">
       <div className="p-4">
         <div>
-          <div className="w-[114px] h-[26px] ml-[1013px]">
-            <h1>افزودن خبر جدید</h1>
+          <div className=" whitespace-nowrap w-[114px] h-[26px] ml-[1013px]">
+            <h1>ثبت / ویرایش تبلیغات</h1>
           </div>
 
           <div className="flex items-start">
@@ -133,7 +131,7 @@ export default function EditAds() {
               فعال / غیرفعال
             </span>
             <label className="relative inline-flex items-center cursor-pointer pr-10">
-              <input type="checkbox" className="sr-only peer "/>
+              <input type="checkbox" className="sr-only peer " />
               <div className="w-10 h-5 bg-gray-300 rounded-full shadow-inner peer-checked:bg-blue-500 transition-all "></div>
               <div className="absolute w-5 h-5 bg-white rounded-full shadow inset-y-0 left-0 peer-checked:translate-x-5 transition-transform"></div>
             </label>
