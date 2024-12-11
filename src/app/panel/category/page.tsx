@@ -1,6 +1,12 @@
-import Image from "next/image";
+"use client";
 
-const page = () => {
+import { useState } from "react";
+import DeleteModal from "../../../container/DeleteNotification";
+
+const Page = () => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
+
   const fakeNews = [
     {
       id: 1,
@@ -19,13 +25,32 @@ const page = () => {
     }
   ];
 
+  const openDeleteModal = (id: number) => {
+    setSelectedNewsId(id); 
+    setIsDeleteModalOpen(true);
+  };
+
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedNewsId(null);
+  };
+
+
+  const confirmDelete = () => {
+    if (selectedNewsId !== null) {
+      console.log("Item deleted with id:", selectedNewsId);
+    }
+    closeDeleteModal();
+  };
+
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
         <div className="flex items-center justify-between px-6 mt-2 ">
           <h1 className="text-lg font-bold text-gray-700"> دسته بندی ها</h1>
 
-          <div className="flex items-center gap-3 flex-row-reverse   ">
+          <div className="flex items-center gap-3 flex-row-reverse">
             <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
               <img src="/icons/plus.svg" alt="plus " />
               افزودن
@@ -50,7 +75,7 @@ const page = () => {
                   className="w-5 h-5"
                 />
               </span>
-              <select className="border rounded-[5px]  pr-4 ml-14 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
+              <select className="border rounded-[5px] pr-4 ml-14 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
                 <option value="default">انتخاب دسته</option>
                 <option value="top">ورزش</option>
                 <option value="middle">اقتصاد</option>
@@ -63,13 +88,13 @@ const page = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto mx-4 mt-4 ">
-          <div className="w-full bg-white  shadow-md overflow-hidden  ">
-            <div className="bg-[#AC2043] text-white rounded-[10px] w-[1103px] flex ">
+        <div className="overflow-x-auto mx-4 mt-4">
+          <div className="w-full bg-white shadow-md overflow-hidden">
+            <div className="bg-[#AC2043] text-white rounded-[10px] w-full flex">
               <p className="py-3 px-4 text-right ">ردیف</p>
               <p className="py-3 px-24 text-right mr-[80px] ">نام</p>
               <p className="py-3 px-4 text-right mr-[100px] ">نام زیر دسته</p>
-              <p className="py-3 px-4  text-right mr-[404px] ">عملیات</p>
+              <p className="py-3 px-4 text-right mr-[404px]">عملیات</p>
             </div>
             <div>
               {fakeNews.map((news) => (
@@ -78,9 +103,8 @@ const page = () => {
                   className="even:bg-red-50 rounded-md w-[1103px] flex"
                 >
                   <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
-                  <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap ">
+                  <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">
                     {news.title}
-                    {""}
                   </p>
                   <p className="py-3 px-4 text-right w-[140px] flex justify-center ml-24">
                     {news.category}
@@ -94,7 +118,7 @@ const page = () => {
                         className="w-5 h-5 inline"
                       />
                     </button>
-                    <button>
+                    <button onClick={() => openDeleteModal(news.id)}>
                       <img
                         src="/icons/trash.svg"
                         alt="Delete"
@@ -108,8 +132,12 @@ const page = () => {
           </div>
         </div>
       </div>
+
+      {isDeleteModalOpen && (
+        <DeleteModal onConfirm={confirmDelete} onCancel={closeDeleteModal} />
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;

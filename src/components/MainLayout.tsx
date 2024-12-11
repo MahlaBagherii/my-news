@@ -1,7 +1,9 @@
-import React from "react";
-import Dashboard from "../app/panel/dashboard/page";
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="min-h-screen overflow-y-auto bg-white">
+      {children}
+    </div>
+  );
+};
 
-export default function MainLayout() {
-  return;
-  <div></div>;
-}
+export default MainLayout;
