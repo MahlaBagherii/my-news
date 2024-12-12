@@ -53,6 +53,10 @@ const Dashboard = () => {
     setSelectedNewsId(null);
   };
 
+  const handleEditClick = (id: number) => {
+    router.push(`/panel/add-news?id=${id}`);
+  };
+
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
@@ -94,13 +98,14 @@ const Dashboard = () => {
                   </p>
                   <p className="py-3 px-4 text-right">{news.date}</p>
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around">
-                    <button>
+                    <button onClick={() => handleEditClick(news.id)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>
+
                     <button onClick={() => handleDeleteClick(news.id)}>
                       <img
                         src="/icons/trash.svg"

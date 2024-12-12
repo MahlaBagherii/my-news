@@ -1,47 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import DeleteModal from "../../../container/DeleteNotification";
+import CategoryAddNotification from "../../../container/CategoryAddNotification";
 
 const Page = () => {
+  const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
 
   const fakeNews = [
-    {
-      id: 1,
-      title: "والیبال",
-      category: "ورزش"
-    },
-    {
-      id: 11,
-      title: "آمریکا",
-      category: "جهان"
-    },
-    {
-      id: 3,
-      title: "دولت",
-      category: "سیاست"
-    }
+    { id: 1, title: "والیبال", category: "ورزش" },
+    { id: 2, title: "آمریکا", category: "جهان" },
+    { id: 3, title: "دولت", category: "سیاست" }
   ];
 
   const openDeleteModal = (id: number) => {
-    setSelectedNewsId(id); 
+    setSelectedNewsId(id);
     setIsDeleteModalOpen(true);
   };
-
 
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
     setSelectedNewsId(null);
   };
 
-
   const confirmDelete = () => {
     if (selectedNewsId !== null) {
       console.log("Item deleted with id:", selectedNewsId);
     }
     closeDeleteModal();
+  };
+
+  const handleEdit = (id: number) => {
+    router.push(`/panel/add-news?id=${id}`);
+  };
+
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
   };
 
   return (
@@ -51,7 +53,10 @@ const Page = () => {
           <h1 className="text-lg font-bold text-gray-700"> دسته بندی ها</h1>
 
           <div className="flex items-center gap-3 flex-row-reverse">
-            <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+            <button
+              className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
+              onClick={openAddModal}
+            >
               <img src="/icons/plus.svg" alt="plus " />
               افزودن
             </button>
@@ -111,10 +116,10 @@ const Page = () => {
                   </p>
 
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around mr-[290px] ml-[20px]">
-                    <button>
+                    <button onClick={() => handleEdit(news.id)}>
                       <img
                         src="/icons/edit.svg"
-                        alt="Active"
+                        alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>
@@ -136,6 +141,11 @@ const Page = () => {
       {isDeleteModalOpen && (
         <DeleteModal onConfirm={confirmDelete} onCancel={closeDeleteModal} />
       )}
+
+      <CategoryAddNotification
+        isOpen={isAddModalOpen}
+        onClose={closeAddModal}
+      />
     </div>
   );
 };

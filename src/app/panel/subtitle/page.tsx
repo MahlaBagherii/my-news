@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import DeleteModal from "../../../container/DeleteNotification";
+import EditNotification from "../../../container/EditNotification";
 
 const Page = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState(null);
 
   const fakeNews = [
     {
@@ -27,12 +30,17 @@ const Page = () => {
     }
   ];
 
-  const handleDeleteClick = () => setIsModalOpen(true);
+  const handleDeleteClick = () => setIsDeleteModalOpen(true);
   const handleConfirmDelete = () => {
-    // انجام عملیات حذف
-    setIsModalOpen(false); // بستن مودال بعد از تایید
+    setIsDeleteModalOpen(false);
   };
-  const handleCancelDelete = () => setIsModalOpen(false); // بستن مودال بعد از لغو
+  const handleCancelDelete = () => setIsDeleteModalOpen(false);
+
+  const handleEditClick = (news) => {
+    setSelectedNews(news);
+    setIsEditModalOpen(true);
+  };
+  const handleCloseEditModal = () => setIsEditModalOpen(false);
 
   return (
     <div className="flex items-center justify-center px-5">
@@ -40,10 +48,16 @@ const Page = () => {
         <div className="flex items-center justify-between px-6 mt-2">
           <h1 className="text-lg font-bold text-gray-700">زیرنویس اخبار</h1>
           <div className="flex items-center gap-3 flex-row-reverse">
-            <button className="bg-[#2F80ED] text-white w-[166px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd] whitespace-nowrap">
+            <button
+              className="bg-[#2F80ED] text-white w-[166px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd] whitespace-nowrap"
+              onClick={() =>
+                handleEditClick({ title: "", id: null, category: "", date: "" })
+              }
+            >
               <img src="/icons/plus.svg" alt="plus" />
               افزودن زیرنویس
             </button>
+
             <div className="relative w-[300px] ml-12">
               <span className="absolute top-3 right-3 text-gray-400 ml-6">
                 <img src="/icons/search.svg" alt="Search" />
@@ -77,7 +91,7 @@ const Page = () => {
                   </p>
                   <p className="py-3 px-[154px] text-right">{news.date}</p>
                   <div className="py-3 px-7 text-right mr-4 w-[160px] flex justify-around">
-                    <button>
+                    <button onClick={() => handleEditClick(news)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Edit"
@@ -98,11 +112,16 @@ const Page = () => {
           </div>
         </div>
       </div>
-      {isModalOpen && (
+
+      {isDeleteModalOpen && (
         <DeleteModal
           onConfirm={handleConfirmDelete}
           onCancel={handleCancelDelete}
         />
+      )}
+
+      {isEditModalOpen && (
+        <EditNotification news={selectedNews} onClose={handleCloseEditModal} />
       )}
     </div>
   );

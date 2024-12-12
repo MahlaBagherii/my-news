@@ -1,6 +1,64 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import TextEditor from "../../../container/TextEditor";
 
+const fakeNews = [
+  {
+    id: 1,
+    title: "پیشرفت تیم ملی در مسابقات آسیایی",
+    category: "ورزشی",
+    shortDescription: "توضیحات کوتاه درباره خبر ورزشی",
+    date: "1402/08/30",
+    keywords: "ورزش, تیم ملی, بازی‌ها",
+    status: true
+  },
+  {
+    id: 11,
+    title: "Marya",
+    category: "گوربا",
+    shortDescription: "توضیحات کوتاه درباره گوربا",
+    date: "1383/10/12",
+    keywords: "گوربا, Marya",
+    status: false
+  }
+];
+
 export default function AddNews() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+
+  const [formData, setFormData] = useState({
+    title: "",
+    shortDescription: "",
+    category: "",
+    keywords: "",
+    status: false
+  });
+
+  useEffect(() => {
+    if (id) {
+      const newsItem = fakeNews.find((news) => news.id === parseInt(id));
+      if (newsItem) {
+        setFormData({
+          title: newsItem.title,
+          shortDescription: newsItem.shortDescription || "",
+          category: newsItem.category || "",
+          keywords: newsItem.keywords || "",
+          status: newsItem.status || false
+        });
+      }
+    }
+  }, [id]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <div className="bg-white rounded-[20px]">
       <div className="p-4">
@@ -17,6 +75,9 @@ export default function AddNews() {
                 </label>
                 <input
                   type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
                   className="mr-6 w-[661px] h-[50px] ml-[20px] rounded-[5px] border border-gray-200 bg-[#FAFAFA] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
@@ -25,7 +86,12 @@ export default function AddNews() {
                 <label className="w-[66px] block text-sm font-medium text-gray-800 mb-2 whitespace-nowrap ">
                   توضیح کوتاه
                 </label>
-                <input className="mr-6 w-[661px] h-[147px] bg-[#FAFAFA] border ml-[20px] border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
+                <input
+                  name="shortDescription"
+                  value={formData.shortDescription}
+                  onChange={handleChange}
+                  className="mr-6 w-[661px] h-[147px] bg-[#FAFAFA] border ml-[20px] border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                />
               </div>
             </div>
 
