@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const Page = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("all"); // مدیریت دکمه فعال
+  const [activeFilter, setActiveFilter] = useState("all"); 
 
   const openDeleteModal = () => setShowDeleteModal(true);
   const confirmDelete = () => {
