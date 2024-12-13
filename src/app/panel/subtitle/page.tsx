@@ -83,7 +83,7 @@ const Page = () => {
               {fakeNews.map((news) => (
                 <div
                   key={news.id}
-                  className="even:bg-red-50 rounded-md w-[1103px] flex"
+                  className="even:bg-red-50 rounded-md w-full flex"
                 >
                   <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
                   <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">

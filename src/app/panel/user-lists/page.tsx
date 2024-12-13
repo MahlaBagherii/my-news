@@ -1,4 +1,16 @@
+"use client";
+
+import React, { useState } from "react";
+import RegisterUserModal from "../../../container/NewUserNotification";
+import BlockUserModal from "../../../container/BlockNotification";
+import UserRoleNotification from "../../../container/UserRoleNotification";
+
 const Page = () => {
+  const [showNewUserModal, setShowNewUserModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showBlockUserModal, setShowBlockUserModal] = useState(false);
+  const [showRoleModal, setShowRoleModal] = useState(false);
+
   const fakeNews = [
     {
       id: 1,
@@ -30,14 +42,36 @@ const Page = () => {
     }
   ];
 
+  const openRoleModal = (user) => {
+    setSelectedUser(user);
+    setShowRoleModal(true);
+  };
+
+  const closeRoleModal = () => {
+    setSelectedUser(null);
+    setShowRoleModal(false);
+  };
+
+  const openBlockModal = (user) => {
+    setSelectedUser(user);
+    setShowBlockUserModal(true);
+  };
+
+  const closeBlockModal = () => {
+    setSelectedUser(null);
+    setShowBlockUserModal(false);
+  };
+
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
         <div className="flex items-center justify-between px-6 mt-2 ">
           <h1 className="text-lg font-bold text-gray-700">لیست کاربران</h1>
-
           <div className="flex items-center gap-3 flex-row-reverse">
-            <button className="bg-[#2F80ED] text-white w-[140px] h-[48px] rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+            <button
+              onClick={() => setShowNewUserModal(true)}
+              className="bg-[#2F80ED] text-white w-[140px] h-[48px] rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
+            >
               <img src="/icons/plus.svg" alt="plus" className="w-4 h-4" />
               افزودن کاربر
             </button>
@@ -70,26 +104,26 @@ const Page = () => {
               {fakeNews.map((news, index) => (
                 <tr
                   key={index}
-                  className={` ${
+                  className={`${
                     index % 2 === 0 ? "bg-white" : "bg-red-50"
                   } text-gray-700 first:[&_td]:rounded-r-[10px] last:[&_td]:rounded-l-[10px]`}
                 >
-                  <td className="py-3 px-4 ">{news.id}</td>
+                  <td className="py-3 px-4">{news.id}</td>
                   <td className="py-3 px-12 text-right">{news.title}</td>
                   <td className="py-3 px-24 text-center">{news.category}</td>
                   <td className="py-3 px-4 text-center">{news.date}</td>
                   <td className="py-3 px-7 mr-4 text-center flex gap-8">
-                    <button>
+                    <button onClick={() => openRoleModal(news)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>
-                    <button>
+                    <button onClick={() => openBlockModal(news)}>
                       <img
                         src="/icons/slash.svg"
-                        alt="Delete"
+                        alt="Block"
                         className="w-5 h-5 inline"
                       />
                     </button>
@@ -115,6 +149,21 @@ const Page = () => {
           </table>
         </div>
       </div>
+
+      <RegisterUserModal
+        isOpen={showNewUserModal}
+        onClose={() => setShowNewUserModal(false)}
+      />
+
+      <UserRoleNotification
+        isOpen={showRoleModal}
+        user={selectedUser}
+        onClose={closeRoleModal}
+      />
+
+      {showBlockUserModal && (
+        <BlockUserModal user={selectedUser} onClose={closeBlockModal} />
+      )}
     </div>
   );
 };

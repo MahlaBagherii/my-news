@@ -62,7 +62,7 @@ const Dashboard = () => {
       <div className="w-full rounded-[20px]">
         <div className="flex items-center justify-between px-6 mt-2 ">
           <h1 className="text-lg font-bold text-gray-700">مدیریت اخبار</h1>
-          <div className="flex items-center gap-3 flex-row-reverse">
+          <div className="flex items-center gap-3 flex-row-reverse ">
             <button
               className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
               onClick={handleAddNews}
@@ -87,7 +87,7 @@ const Dashboard = () => {
               {fakeNews.map((news) => (
                 <div
                   key={news.id}
-                  className="even:bg-red-50 rounded-md w-[1103px] flex"
+                  className="even:bg-red-50 rounded-md w-full flex"
                 >
                   <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
                   <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">

@@ -1,9 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DeleteModal from "../../../container/DeleteNotification";
 
 const Page = () => {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fakeNews = [
@@ -12,30 +14,37 @@ const Page = () => {
       title: "juju",
       category: "1402/08/30",
       date: "1402/08/30",
-      status: true
+      status: true,
     },
     {
       id: 11,
       title: "Marya",
       category: "1402/08/30",
       date: "1383/10/12",
-      status: false
+      status: false,
     },
     {
       id: 3,
       title: "pishi",
       category: "1402/08/30",
       date: "1383/04/13",
-      status: true
-    }
+      status: true,
+    },
   ];
 
   const handleDeleteClick = () => setIsModalOpen(true);
   const handleConfirmDelete = () => {
     setIsModalOpen(false);
-    // Add logic to delete the item here
   };
   const handleCancelDelete = () => setIsModalOpen(false);
+
+  const handleAddNewAd = () => {
+    router.push("/panel/edit-ads");
+  };
+
+  const handleEditAd = (id) => {
+    router.push(`/panel/edit-ads?id=${id}`);
+  };
 
   return (
     <div className="flex items-center justify-center px-5">
@@ -44,7 +53,10 @@ const Page = () => {
           <h1 className="text-lg font-bold text-gray-700">مدیریت تبلیغات </h1>
 
           <div className="flex items-center gap-3 flex-row-reverse">
-            <button className="bg-[#2F80ED] text-white w-[180px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd] whitespace-nowrap">
+            <button
+              onClick={handleAddNewAd}
+              className="bg-[#2F80ED] text-white w-[180px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd] whitespace-nowrap"
+            >
               <img src="/icons/plus.svg" alt="plus" />
               افزودن تبلیغ جدید
             </button>
@@ -76,7 +88,7 @@ const Page = () => {
               {fakeNews.map((news) => (
                 <div
                   key={news.id}
-                  className="even:bg-red-50 rounded-md w-[1103px] flex"
+                  className="even:bg-red-50 rounded-md w-full flex"
                 >
                   <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
                   <p className="py-3 px-24 text-right w-[380px] mr-[10px] text-nowrap">
@@ -87,7 +99,7 @@ const Page = () => {
                   </p>
                   <p className="py-3 px-4 text-right">{news.date}</p>
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around mr-8">
-                    <button>
+                    <button onClick={() => handleEditAd(news.id)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Active"
