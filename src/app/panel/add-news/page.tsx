@@ -1,142 +1,149 @@
-import MainLayout from "../../../components/MainLayout";
-import TextEditor from "../../../container/TextEditor";
+"use client";
 
-export default function AddNews() {
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import DeleteModal from "../../../container/DeleteNotification";
+
+const Dashboard = () => {
+  const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
+
+  const fakeNews = [
+    {
+      id: 1,
+      title: "پیشرفت تیم ملی در مسابقات آسیایی",
+      category: "ورزشی",
+      date: "1402/08/30",
+      status: true
+    },
+    {
+      id: 11,
+      title: "Marya",
+      category: "گوربا",
+      date: "1383/10/12",
+      status: false
+    },
+    {
+      id: 3,
+      title: "pishi",
+      category: "batman",
+      date: "1383/04/13",
+      status: true
+    }
+  ];
+
+  const handleAddNews = () => {
+    router.push("/panel/add-news");
+  };
+
+  const handleDeleteClick = (id: number) => {
+    setSelectedNewsId(id);
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Deleted news with ID:", selectedNewsId);
+    setShowModal(false);
+    setSelectedNewsId(null);
+  };
+
+  const handleCancelDelete = () => {
+    setShowModal(false);
+    setSelectedNewsId(null);
+  };
+
+  const handleEditClick = (id: number) => {
+    router.push(`/panel/add-news?id=${id}`);
+  };
+
   return (
-    <div className="bg-white rounded-[20px]">
-      <div className="p-4">
-        <div>
-          <div className="w-[114px] h-[26px] ml-[1013px]">
-            <h1>افزودن خبر جدید</h1>
+    <div className="flex items-center justify-center px-5">
+      <div className="w-full rounded-[20px]">
+        <div className="flex items-center justify-between px-6 mt-2 ">
+          <h1 className="text-lg font-bold text-gray-700">مدیریت اخبار</h1>
+          <div className="flex items-center gap-3 flex-row-reverse ">
+            <button
+              className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
+              onClick={handleAddNews}
+            >
+              <img src="/icons/plus.svg" alt="plus " />
+              افزودن خبر
+            </button>
           </div>
+        </div>
 
-          <div className="flex items-start">
+        <div className="overflow-x-auto mx-4 mt-4 ">
+          <div className="w-full bg-white shadow-md overflow-hidden">
+            <div className="bg-[#AC2043] text-white rounded-[10px] w-full flex">
+              <p className="py-3 px-4 text-right">ردیف</p>
+              <p className="py-3 px-24 text-right mr-[100px]">عنوان خبر</p>
+              <p className="py-3 px-4 text-right mr-[100px]">دسته بندی</p>
+              <p className="py-3 px-4 text-right mr-[50px]">تاریخ</p>
+              <p className="py-3 px-4 text-right mr-[50px]">عملیات</p>
+              <p className="py-3 px-3 text-right mr-[50px]">وضعیت</p>
+            </div>
             <div>
-              <div className="flex mb-4 items-center mt-12">
-                <label className="w-[66px] block text-sm font-medium text-gray-700 mb-2">
-                  عنوان خبر
-                </label>
-                <input
-                  type="text"
-                  className="mr-6 w-[661px] h-[50px] ml-[20px] rounded-[5px] border border-gray-200 bg-[#FAFAFA] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                />
-              </div>
+              {fakeNews.map((news) => (
+                <div
+                  key={news.id}
+                  className="even:bg-red-50 rounded-md w-full flex"
+                >
+                  <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
+                  <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">
+                    {news.title}
+                  </p>
+                  <p className="py-3 px-4 text-right w-[140px] flex justify-center">
+                    {news.category}
+                  </p>
+                  <p className="py-3 px-4 text-right">{news.date}</p>
+                  <div className="py-3 px-4 text-right w-[150px] flex justify-around">
+                    <button onClick={() => handleEditClick(news.id)}>
+                      <img
+                        src="/icons/edit.svg"
+                        alt="Edit"
+                        className="w-5 h-5 inline"
+                      />
+                    </button>
 
-              <div className="flex mb-4 items-center">
-                <label className="w-[66px] block text-sm font-medium text-gray-800 mb-2 whitespace-nowrap ">
-                  توضیح کوتاه
-                </label>
-                <input className="mr-6 w-[661px] h-[147px] bg-[#FAFAFA] border ml-[20px] border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500" />
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="bg-white min-w-[219px] h-[131px] ml-[20px] flex flex-col items-center justify-between rounded-md mt-12 mr-8 p-4 border border-gray-300 shadow-sm">
-                <div className="flex items-center text-black gap-2 justify-start w-full">
-                  <img
-                    src="/icons/gallery.svg"
-                    alt="gallery icon"
-                    className="w-4 h-4"
-                  />
-
-                  <img
-                    src="/icons/video-play.svg"
-                    alt="video play icon"
-                    className="w-4 h-4"
-                  />
-
-                  <span className="text-sm">JPEG - MP4</span>
+                    <button onClick={() => handleDeleteClick(news.id)}>
+                      <img
+                        src="/icons/trash.svg"
+                        alt="Delete"
+                        className="w-5 h-5"
+                      />
+                    </button>
+                  </div>
+                  <p className="py-3 px-3 text-right flex justify-center w-[120px]">
+                    {news.status ? (
+                      <img
+                        src="/icons/tick.svg"
+                        alt="Active"
+                        className="w-5 h-5 inline"
+                      />
+                    ) : (
+                      <img
+                        src="/icons/close.svg"
+                        alt="Inactive"
+                        className="w-5 h-5 inline"
+                      />
+                    )}
+                  </p>
                 </div>
-
-                <button className="flex items-center justify-center w-[130px] h-[32px] mt-5 mb-12 border-2 border-dashed border-gray-400 rounded-md text-black hover:bg-gray-50 transition">
-                  <img
-                    src="/icons/add.svg"
-                    alt="add icon"
-                    className="w-6 h-6"
-                  />
-                  <span className="whitespace-nowrap">افزودن رسانه</span>
-                </button>
-              </div>
-
-              <div className="mt-4 mr-[70px] w-full text-red-500 flex justify-center">
-                <button className="flex items-center text-sm font-medium hover:text-red-700 transition">
-                  <img
-                    src="/icons/close-circle.svg"
-                    alt="delete icon"
-                    className="w-4 h-4 ml-2"
-                  />
-                  حذف رسانه
-                </button>
-              </div>
+              ))}
             </div>
-          </div>
-        </div>
-
-        <div className="flex mr-[82px] mt-5">
-          <div className="relative w-[135px] h-[50px] ml-[50px]">
-            <span className="absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none">
-              <img
-                src="/icons/arrow-down.svg"
-                alt="Custom Icon"
-                className="w-5 h-5"
-              />
-            </span>
-            <select className="border rounded-[5px] pr-4 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
-              <option value="default">دسته بندی</option>
-              <option value="top">جهان</option>
-              <option value="middle">ایران</option>
-              <option value="bottom">سیاست</option>
-              <option value="default">اقتصاد</option>
-              <option value="top">ورزش</option>
-              <option value="middle">فرهنگ</option>
-              <option value="bottom">حوادث</option>
-            </select>
-          </div>
-
-          <div className="relative w-[167px] h-[50px] ml-[50px]">
-            <span className="absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none">
-              <img
-                src="/icons/arrow-down.svg"
-                alt="Custom Icon"
-                className="w-5 h-5"
-              />
-            </span>
-            <select className="border rounded-[5px] pr-4 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
-              <option value="default">موقعیت نمایش</option>
-              <option value="top">بدون برچسب</option>
-              <option value="middle">ویژه اصلی 1</option>
-              <option value="bottom">ویژه اصلی 2</option>
-              <option value="default">برگزیده اصلی</option>
-              <option value="top">ویژه دسته 1</option>
-              <option value="middle">ویژه دسته 2</option>
-              <option value="bottom">پایین</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="flex mb-3 items-center mt-5">
-          <label className="block text-sm font-medium text-gray-700 whitespace-nowrap ml-2">
-            کلمات کلیدی
-          </label>
-
-          <input
-            type="text"
-            className="w-[660px] h-[50px] ml-[48px] rounded-[5px] border border-gray-200 bg-[#FAFAFA] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
-
-          <div className="flex items-center gap-2">
-            <input
-              id="confirm-checkbox"
-              type="checkbox"
-              className="w-4 h-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-            />
-            <label htmlFor="confirm-checkbox" className="text-sm text-gray-700">
-              تایید برای نمایش
-            </label>
           </div>
         </div>
       </div>
-      <TextEditor />
+
+      {showModal && (
+        <DeleteModal
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
     </div>
   );
-}
+};
+
+export default Dashboard;

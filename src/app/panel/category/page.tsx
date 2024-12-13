@@ -1,23 +1,50 @@
-import Image from "next/image";
+"use client";
 
-const page = () => {
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import DeleteModal from "../../../container/DeleteNotification";
+import CategoryAddNotification from "../../../container/CategoryAddNotification";
+
+const Page = () => {
+  const router = useRouter();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
+
   const fakeNews = [
-    {
-      id: 1,
-      title: "والیبال",
-      category: "ورزش"
-    },
-    {
-      id: 11,
-      title: "آمریکا",
-      category: "جهان"
-    },
-    {
-      id: 3,
-      title: "دولت",
-      category: "سیاست"
-    }
+    { id: 1, title: "والیبال", category: "ورزش" },
+    { id: 2, title: "آمریکا", category: "جهان" },
+    { id: 3, title: "دولت", category: "سیاست" }
   ];
+
+  const openDeleteModal = (id: number) => {
+    setSelectedNewsId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedNewsId(null);
+  };
+
+  const confirmDelete = () => {
+    if (selectedNewsId !== null) {
+      console.log("Item deleted with id:", selectedNewsId);
+    }
+    closeDeleteModal();
+  };
+
+  const handleEdit = (id: number) => {
+    router.push(`/panel/add-news?id=${id}`);
+  };
+
+  const openAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
 
   return (
     <div className="flex items-center justify-center px-5">
@@ -25,8 +52,11 @@ const page = () => {
         <div className="flex items-center justify-between px-6 mt-2 ">
           <h1 className="text-lg font-bold text-gray-700"> دسته بندی ها</h1>
 
-          <div className="flex items-center gap-3 flex-row-reverse   ">
-            <button className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]">
+          <div className="flex items-center gap-3 flex-row-reverse">
+            <button
+              className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
+              onClick={openAddModal}
+            >
               <img src="/icons/plus.svg" alt="plus " />
               افزودن
             </button>
@@ -50,7 +80,7 @@ const page = () => {
                   className="w-5 h-5"
                 />
               </span>
-              <select className="border rounded-[5px]  pr-4 ml-14 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
+              <select className="border rounded-[5px] pr-4 ml-14 py-2 text-gray-700 w-full h-full appearance-none bg-transparent">
                 <option value="default">انتخاب دسته</option>
                 <option value="top">ورزش</option>
                 <option value="middle">اقتصاد</option>
@@ -63,38 +93,37 @@ const page = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto mx-4 mt-4 ">
-          <div className="w-full bg-white  shadow-md overflow-hidden  ">
-            <div className="bg-[#AC2043] text-white rounded-[10px] w-[1103px] flex ">
+        <div className="overflow-x-auto mx-4 mt-4">
+          <div className="w-full bg-white shadow-md overflow-hidden">
+            <div className="bg-[#AC2043] text-white rounded-[10px] w-full flex">
               <p className="py-3 px-4 text-right ">ردیف</p>
               <p className="py-3 px-24 text-right mr-[80px] ">نام</p>
               <p className="py-3 px-4 text-right mr-[100px] ">نام زیر دسته</p>
-              <p className="py-3 px-4  text-right mr-[404px] ">عملیات</p>
+              <p className="py-3 px-4 text-right mr-[404px]">عملیات</p>
             </div>
             <div>
               {fakeNews.map((news) => (
                 <div
                   key={news.id}
-                  className="even:bg-red-50 rounded-md w-[1103px] flex"
+                  className="even:bg-red-50 rounded-md w-full flex"
                 >
                   <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
-                  <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap ">
+                  <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">
                     {news.title}
-                    {""}
                   </p>
                   <p className="py-3 px-4 text-right w-[140px] flex justify-center ml-24">
                     {news.category}
                   </p>
 
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around mr-[290px] ml-[20px]">
-                    <button>
+                    <button onClick={() => handleEdit(news.id)}>
                       <img
                         src="/icons/edit.svg"
-                        alt="Active"
+                        alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>
-                    <button>
+                    <button onClick={() => openDeleteModal(news.id)}>
                       <img
                         src="/icons/trash.svg"
                         alt="Delete"
@@ -108,8 +137,17 @@ const page = () => {
           </div>
         </div>
       </div>
+
+      {isDeleteModalOpen && (
+        <DeleteModal onConfirm={confirmDelete} onCancel={closeDeleteModal} />
+      )}
+
+      <CategoryAddNotification
+        isOpen={isAddModalOpen}
+        onClose={closeAddModal}
+      />
     </div>
   );
 };
 
-export default page;
+export default Page;
