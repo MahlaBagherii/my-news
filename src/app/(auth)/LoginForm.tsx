@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import token from "../../api/token";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState<string>("");
@@ -9,16 +10,29 @@ const LoginForm: React.FC = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); 
 
     if (username && password) {
-      console.log("Login successful!");
-      router.push("/panel/dashboard");
+      try {
+        const response = await token(username, password);
+
+        if (response?.access) {
+          console.log("Login successful");
+          router.push("/panel/dashboard");
+        } else {
+          console.error("Invalid credentials");
+          alert("نام کاربری یا رمز عبور اشتباه است.");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+        alert("خطایی رخ داده است. لطفاً دوباره تلاش کنید.");
+      }
     } else {
-      console.error("Please enter both username and password");
+      alert("لطفاً نام کاربری و رمز عبور را وارد کنید.");
     }
   };
+
   return (
     <div className="w-full max-w-md mx-auto mt-10 p-6 bg-white rounded-lg">
       <div className="flex flex-col items-center mb-16">
@@ -76,7 +90,7 @@ const LoginForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="w-full py-2 text-white bg-[#AC2043] transition rounded-[15px] "
+          className="w-full py-2 text-white bg-[#AC2043] transition rounded-[15px]"
         >
           ورود به حساب
         </button>
