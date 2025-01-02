@@ -4,53 +4,54 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DeleteModal from "../../../container/DeleteNotification";
 
+interface AdItem {
+  id: number;
+  title: string;
+  category: string;
+  date: string;
+  status: boolean;
+}
+
 const Page = () => {
   const router = useRouter();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const fakeNews = [
+  const fakeNews: AdItem[] = [
     {
       id: 1,
       title: "juju",
       category: "1402/08/30",
       date: "1402/08/30",
-      status: true,
+      status: true
     },
     {
       id: 11,
       title: "Marya",
       category: "1402/08/30",
       date: "1383/10/12",
-      status: false,
+      status: false
     },
     {
       id: 3,
       title: "pishi",
       category: "1402/08/30",
       date: "1383/04/13",
-      status: true,
-    },
+      status: true
+    }
   ];
 
   const handleDeleteClick = () => setIsModalOpen(true);
-  const handleConfirmDelete = () => {
-    setIsModalOpen(false);
-  };
+  const handleConfirmDelete = () => setIsModalOpen(false);
   const handleCancelDelete = () => setIsModalOpen(false);
 
-  const handleAddNewAd = () => {
-    router.push("/panel/edit-ads");
-  };
-
-  const handleEditAd = (id) => {
-    router.push(`/panel/edit-ads?id=${id}`);
-  };
+  const handleAddNewAd = () => router.push("/panel/edit-ads");
+  const handleEditAd = (id: number) => router.push(`/panel/edit-ads?id=${id}`);
 
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
         <div className="flex items-center justify-between px-6 mt-2">
-          <h1 className="text-lg font-bold text-gray-700">مدیریت تبلیغات </h1>
+          <h1 className="text-lg font-bold text-gray-700">مدیریت تبلیغات</h1>
 
           <div className="flex items-center gap-3 flex-row-reverse">
             <button
@@ -102,7 +103,7 @@ const Page = () => {
                     <button onClick={() => handleEditAd(news.id)}>
                       <img
                         src="/icons/edit.svg"
-                        alt="Active"
+                        alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>

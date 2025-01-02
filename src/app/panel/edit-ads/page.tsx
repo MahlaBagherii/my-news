@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import Calendar from "react-datepicker/dist/calendar";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function EditAds() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [isStartPickerOpen, setIsStartPickerOpen] = useState(false);
-  const [isEndPickerOpen, setIsEndPickerOpen] = useState(false);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [isStartPickerOpen, setIsStartPickerOpen] = useState<boolean>(false);
+  const [isEndPickerOpen, setIsEndPickerOpen] = useState<boolean>(false);
 
   return (
     <div className="bg-white rounded-[20px]">
@@ -46,13 +45,11 @@ export default function EditAds() {
                   alt="gallery icon"
                   className="w-4 h-4"
                 />
-
                 <img
                   src="/icons/video-play.svg"
                   alt="video play icon"
                   className="w-4 h-4"
                 />
-
                 <span className="text-sm">JPEG - MP4</span>
               </div>
 
@@ -119,27 +116,20 @@ export default function EditAds() {
                 <div className="absolute top-12 left-0 z-10 bg-white rounded-lg shadow-lg p-2">
                   <DatePicker
                     selected={startDate}
-                    onChange={(date) => {
+                    onChange={(date: Date) => {
                       setStartDate(date);
                       setIsStartPickerOpen(false);
                     }}
                     inline
                     dateFormat="yyyy/MM/dd"
-                    calendarClassName="w-full text-gray-700 bg-white rounded-lg border border-gray-200 shadow-sm "
-                    dayClassName={(date) =>
+                    calendarClassName="w-full text-gray-700 bg-white rounded-lg border border-gray-200 shadow-sm"
+                    dayClassName={(date: Date) =>
                       "cursor-pointer rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-100 transition " +
                       (date.getDate() === startDate?.getDate()
                         ? " bg-red-500 text-white"
                         : "")
                     }
                     todayButton="امروز"
-                    customInput={
-                      <input
-                        type="text"
-                        placeholder="تاریخ شروع"
-                        className="w-full text-center text-sm focus:outline-none"
-                      />
-                    }
                   />
                 </div>
               )}
@@ -164,30 +154,23 @@ export default function EditAds() {
                 onClick={() => setIsEndPickerOpen(true)}
               />
               {isEndPickerOpen && (
-                <div className="absolute top-12 left-0 z-10 bg-  rounded-lg shadow-lg p-2">
+                <div className="absolute top-12 left-0 z-10 bg-white rounded-lg shadow-lg p-2">
                   <DatePicker
                     selected={endDate}
-                    onChange={(date) => {
+                    onChange={(date: Date) => {
                       setEndDate(date);
                       setIsEndPickerOpen(false);
                     }}
                     inline
                     dateFormat="yyyy/MM/dd"
                     calendarClassName="w-full text-gray-700 bg-white rounded-lg border border-gray-200 shadow-sm"
-                    dayClassName={(date) =>
+                    dayClassName={(date: Date) =>
                       "cursor-pointer rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-600 transition" +
                       (date.getDate() === endDate?.getDate()
                         ? " bg-red-500 text-white"
                         : "")
                     }
                     todayButton="امروز"
-                    customInput={
-                      <input
-                        type="text"
-                        placeholder="تاریخ پایان"
-                        className="w-full text-center text-sm focus:outline-none"
-                      />
-                    }
                   />
                 </div>
               )}

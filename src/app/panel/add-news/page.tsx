@@ -4,7 +4,26 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import TextEditor from "../../../container/TextEditor";
 
-const fakeNews = [
+interface NewsItem {
+  id: number;
+  title: string;
+  category: string;
+  shortDescription: string;
+  date: string;
+  keywords: string;
+  status: boolean;
+}
+
+interface FormData {
+  title: string;
+  shortDescription: string;
+  category: string;
+  keywords: string;
+  status: boolean;
+  content: string;
+}
+
+const fakeNews: NewsItem[] = [
   {
     id: 1,
     title: "پیشرفت تیم ملی در مسابقات آسیایی",
@@ -29,12 +48,13 @@ export default function AddNews() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     title: "",
     shortDescription: "",
     category: "",
     keywords: "",
-    status: false
+    status: false,
+    content: ""
   });
 
   useEffect(() => {
@@ -46,7 +66,8 @@ export default function AddNews() {
           shortDescription: newsItem.shortDescription || "",
           category: newsItem.category || "",
           keywords: newsItem.keywords || "",
-          status: newsItem.status || false
+          status: newsItem.status || false,
+          content: ""
         });
       }
     }
@@ -58,6 +79,8 @@ export default function AddNews() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleSave = () => {};
 
   return (
     <div className="bg-white rounded-[20px]">
@@ -83,7 +106,7 @@ export default function AddNews() {
               </div>
 
               <div className="flex mb-4 items-center">
-                <label className="w-[66px] block text-sm font-medium text-gray-800 mb-2 whitespace-nowrap ">
+                <label className="w-[66px] block text-sm font-medium text-gray-800 mb-2 whitespace-nowrap">
                   توضیح کوتاه
                 </label>
                 <input
@@ -103,13 +126,11 @@ export default function AddNews() {
                     alt="gallery icon"
                     className="w-4 h-4"
                   />
-
                   <img
                     src="/icons/video-play.svg"
                     alt="video play icon"
                     className="w-4 h-4"
                   />
-
                   <span className="text-sm">JPEG - MP4</span>
                 </div>
 
@@ -183,12 +204,10 @@ export default function AddNews() {
           <label className="block text-sm font-medium text-gray-700 whitespace-nowrap ml-2">
             کلمات کلیدی
           </label>
-
           <input
             type="text"
             className="w-[660px] h-[50px] ml-[48px] rounded-[5px] border border-gray-200 bg-[#FAFAFA] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
           />
-
           <div className="flex items-center gap-2">
             <input
               id="confirm-checkbox"
@@ -201,7 +220,17 @@ export default function AddNews() {
           </div>
         </div>
       </div>
+
       <TextEditor />
+
+      <div className="flex justify-center p-4 items-center">
+        <button
+          onClick={handleSave}
+          className="bg-[#2F80ED] text-white px-6 py-2 rounded-[10px] hover:bg-[#256bbd] transition w-[122px] h-12"
+        >
+          ثبت خبر
+        </button>
+      </div>
     </div>
   );
 }

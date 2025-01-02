@@ -5,13 +5,19 @@ import { useRouter } from "next/navigation";
 import DeleteModal from "../../../container/DeleteNotification";
 import CategoryAddNotification from "../../../container/CategoryAddNotification";
 
-const Page = () => {
+interface NewsItem {
+  id: number;
+  title: string;
+  category: string;
+}
+
+const Category = () => {
   const router = useRouter();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
 
-  const fakeNews = [
+  const fakeNews: NewsItem[] = [
     { id: 1, title: "والیبال", category: "ورزش" },
     { id: 2, title: "آمریکا", category: "جهان" },
     { id: 3, title: "دولت", category: "سیاست" }
@@ -49,15 +55,15 @@ const Page = () => {
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
-        <div className="flex items-center justify-between px-6 mt-2 ">
-          <h1 className="text-lg font-bold text-gray-700"> دسته بندی ها</h1>
+        <div className="flex items-center justify-between px-6 mt-2">
+          <h1 className="text-lg font-bold text-gray-700">دسته بندی ها</h1>
 
           <div className="flex items-center gap-3 flex-row-reverse">
             <button
               className="bg-[#2F80ED] text-white w-[122px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd]"
               onClick={openAddModal}
             >
-              <img src="/icons/plus.svg" alt="plus " />
+              <img src="/icons/plus.svg" alt="plus" />
               افزودن
             </button>
 
@@ -72,7 +78,7 @@ const Page = () => {
               />
             </div>
 
-            <div className="relative w-[167px] h-[50px] ml-[50px] ">
+            <div className="relative w-[167px] h-[50px] ml-[50px]">
               <span className="absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none">
                 <img
                   src="/icons/arrow-down.svg"
@@ -96,9 +102,9 @@ const Page = () => {
         <div className="overflow-x-auto mx-4 mt-4">
           <div className="w-full bg-white shadow-md overflow-hidden">
             <div className="bg-[#AC2043] text-white rounded-[10px] w-full flex">
-              <p className="py-3 px-4 text-right ">ردیف</p>
-              <p className="py-3 px-24 text-right mr-[80px] ">نام</p>
-              <p className="py-3 px-4 text-right mr-[100px] ">نام زیر دسته</p>
+              <p className="py-3 px-4 text-right">ردیف</p>
+              <p className="py-3 px-24 text-right mr-[80px]">نام</p>
+              <p className="py-3 px-4 text-right mr-[100px]">نام زیر دسته</p>
               <p className="py-3 px-4 text-right mr-[404px]">عملیات</p>
             </div>
             <div>
@@ -114,7 +120,6 @@ const Page = () => {
                   <p className="py-3 px-4 text-right w-[140px] flex justify-center ml-24">
                     {news.category}
                   </p>
-
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around mr-[290px] ml-[20px]">
                     <button onClick={() => handleEdit(news.id)}>
                       <img
@@ -141,7 +146,6 @@ const Page = () => {
       {isDeleteModalOpen && (
         <DeleteModal onConfirm={confirmDelete} onCancel={closeDeleteModal} />
       )}
-
       <CategoryAddNotification
         isOpen={isAddModalOpen}
         onClose={closeAddModal}
@@ -150,4 +154,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Category;
