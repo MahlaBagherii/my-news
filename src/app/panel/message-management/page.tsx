@@ -3,18 +3,21 @@
 import DeleteModal from "../../../container/DeleteNotification";
 import { useState } from "react";
 
-const Page = () => {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("all"); 
+const Page: React.FC = () => {
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const openDeleteModal = () => setShowDeleteModal(true);
-  const confirmDelete = () => {
+  const handleOpenDeleteModal = (): void => setShowDeleteModal(true);
+  const handleConfirmDelete = (): void => {
     setShowDeleteModal(false);
-    console.log("Item deleted");
   };
-  const cancelDelete = () => setShowDeleteModal(false);
+  const handleCancelDelete = (): void => setShowDeleteModal(false);
 
-  const renderNewsBlock = (title: string, date: string, comment: string) => (
+  const renderNewsBlock = (
+    title: string,
+    date: string,
+    comment: string
+  ): JSX.Element => (
     <div className="w-[1094px] h-[180px] rounded-xl bg-white mr-4 mt-3 p-4 shadow-md shadow-slate-200">
       <div className="flex justify-between items-center">
         <p className="text-gray-700 font-bold">{title}</p>
@@ -34,7 +37,7 @@ const Page = () => {
         <div className="flex space-x-5 rtl:space-x-reverse ml-6">
           <button
             className="bg-red-500 text-white font-bold py-1 px-4 rounded-xl"
-            onClick={openDeleteModal}
+            onClick={handleOpenDeleteModal}
           >
             حذف
           </button>
@@ -52,36 +55,23 @@ const Page = () => {
         <div className="flex items-center justify-between px-6 mt-2">
           <h1 className="text-lg font-bold text-gray-700">مدیریت پیام‌ها</h1>
           <div className="flex justify-center space-x-4 mt-2 bg-white w-[351px] h-12 rounded-xl mr-44 border shadow-md shadow-slate-100">
-            <button
-              className={`font-bold py-2 px-4 rounded-xl w-[100px] h-10 whitespace-nowrap mt-1 ml-2 ${
-                activeFilter === "all"
-                  ? "bg-[#AC2043] text-white"
-                  : "bg-white text-gray-700"
-              }`}
-              onClick={() => setActiveFilter("all")}
-            >
-              همه
-            </button>
-            <button
-              className={`font-bold py-2 px-4 rounded-xl w-[100px] h-10 whitespace-nowrap mt-1 ${
-                activeFilter === "approved"
-                  ? "bg-[#AC2043] text-white"
-                  : "bg-white text-gray-700"
-              }`}
-              onClick={() => setActiveFilter("approved")}
-            >
-              تایید شده
-            </button>
-            <button
-              className={`font-bold py-2 px-4 rounded-xl w-[100px] h-10 whitespace-nowrap mt-1 ${
-                activeFilter === "deleted"
-                  ? "bg-[#AC2043] text-white"
-                  : "bg-white text-gray-700"
-              }`}
-              onClick={() => setActiveFilter("deleted")}
-            >
-              حذف شده
-            </button>
+            {["all", "approved", "deleted"].map((filter) => (
+              <button
+                key={filter}
+                className={`font-bold py-2 px-4 rounded-xl w-[100px] h-10 whitespace-nowrap mt-1 ${
+                  activeFilter === filter
+                    ? "bg-[#AC2043] text-white"
+                    : "bg-white text-gray-700"
+                }`}
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter === "all"
+                  ? "همه"
+                  : filter === "approved"
+                  ? "تایید شده"
+                  : "حذف شده"}
+              </button>
+            ))}
           </div>
           <div className="relative w-[300px] ml-2">
             <span className="absolute top-3 right-3 text-gray-400">
@@ -102,7 +92,7 @@ const Page = () => {
               <span className="py-3 px-24 text-right mr-[10px]">
                 عنوان خبر / نظر
               </span>
-              <span className="py-3 px-4 text-right mr-[560px] ">عملیات</span>
+              <span className="py-3 px-4 text-right mr-[560px]">عملیات</span>
             </div>
           </div>
         </div>
@@ -124,7 +114,10 @@ const Page = () => {
         )}
 
         {showDeleteModal && (
-          <DeleteModal onConfirm={confirmDelete} onCancel={cancelDelete} />
+          <DeleteModal
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+          />
         )}
       </div>
     </div>

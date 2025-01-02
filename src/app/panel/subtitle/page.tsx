@@ -4,12 +4,19 @@ import { useState } from "react";
 import DeleteModal from "../../../container/DeleteNotification";
 import EditNotification from "../../../container/EditNotification";
 
-const Page = () => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedNews, setSelectedNews] = useState(null);
+interface NewsItem {
+  id: number;
+  title: string;
+  category: string;
+  date: string;
+}
 
-  const fakeNews = [
+const Page = () => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+
+  const fakeNews: NewsItem[] = [
     {
       id: 1,
       title: "پیشرفت تیم ملی در مسابقات آسیایی",
@@ -31,15 +38,14 @@ const Page = () => {
   ];
 
   const handleDeleteClick = () => setIsDeleteModalOpen(true);
-  const handleConfirmDelete = () => {
-    setIsDeleteModalOpen(false);
-  };
+  const handleConfirmDelete = () => setIsDeleteModalOpen(false);
   const handleCancelDelete = () => setIsDeleteModalOpen(false);
 
-  const handleEditClick = (news) => {
+  const handleEditClick = (news: NewsItem) => {
     setSelectedNews(news);
     setIsEditModalOpen(true);
   };
+
   const handleCloseEditModal = () => setIsEditModalOpen(false);
 
   return (
@@ -51,7 +57,7 @@ const Page = () => {
             <button
               className="bg-[#2F80ED] text-white w-[166px] h-12 rounded-[10px] flex items-center justify-center gap-2 hover:bg-[#256bbd] whitespace-nowrap"
               onClick={() =>
-                handleEditClick({ title: "", id: null, category: "", date: "" })
+                handleEditClick({ title: "", id: 0, category: "", date: "" })
               }
             >
               <img src="/icons/plus.svg" alt="plus" />

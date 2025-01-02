@@ -5,13 +5,21 @@ import RegisterUserModal from "../../../container/NewUserNotification";
 import BlockUserModal from "../../../container/BlockNotification";
 import UserRoleNotification from "../../../container/UserRoleNotification";
 
-const Page = () => {
-  const [showNewUserModal, setShowNewUserModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [showBlockUserModal, setShowBlockUserModal] = useState(false);
-  const [showRoleModal, setShowRoleModal] = useState(false);
+interface User {
+  id: number;
+  title: string;
+  category: string;
+  date: string;
+  status: boolean;
+}
 
-  const fakeNews = [
+const Page: React.FC = () => {
+  const [showNewUserModal, setShowNewUserModal] = useState<boolean>(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [showBlockUserModal, setShowBlockUserModal] = useState<boolean>(false);
+  const [showRoleModal, setShowRoleModal] = useState<boolean>(false);
+
+  const users: User[] = [
     {
       id: 1,
       title: "مسعود فاطمی",
@@ -42,22 +50,22 @@ const Page = () => {
     }
   ];
 
-  const openRoleModal = (user) => {
+  const openRoleModal = (user: User): void => {
     setSelectedUser(user);
     setShowRoleModal(true);
   };
 
-  const closeRoleModal = () => {
+  const closeRoleModal = (): void => {
     setSelectedUser(null);
     setShowRoleModal(false);
   };
 
-  const openBlockModal = (user) => {
+  const openBlockModal = (user: User): void => {
     setSelectedUser(user);
     setShowBlockUserModal(true);
   };
 
-  const closeBlockModal = () => {
+  const closeBlockModal = (): void => {
     setSelectedUser(null);
     setShowBlockUserModal(false);
   };
@@ -65,7 +73,7 @@ const Page = () => {
   return (
     <div className="flex items-center justify-center px-5">
       <div className="w-full rounded-[20px]">
-        <div className="flex items-center justify-between px-6 mt-2 ">
+        <div className="flex items-center justify-between px-6 mt-2">
           <h1 className="text-lg font-bold text-gray-700">لیست کاربران</h1>
           <div className="flex items-center gap-3 flex-row-reverse">
             <button
@@ -75,7 +83,7 @@ const Page = () => {
               <img src="/icons/plus.svg" alt="plus" className="w-4 h-4" />
               افزودن کاربر
             </button>
-            <div className="relative w-[318px] ml-6 ">
+            <div className="relative w-[318px] ml-6">
               <span className="absolute top-3 right-3 text-gray-400">
                 <img src="/icons/search.svg" alt="Search" className="w-5 h-5" />
               </span>
@@ -94,52 +102,52 @@ const Page = () => {
               <tr className="bg-[#AC2043] text-white text-center rounded-xl">
                 <th className="py-3 px-4 text-right rounded-r-xl">ردیف</th>
                 <th className="py-3 px-12 text-right">نام کاربر</th>
-                <th className="py-3 px-24 ">موبایل</th>
-                <th className="py-3 px-24 ">نقش</th>
-                <th className="py-3 px-8 ">عملیات</th>
+                <th className="py-3 px-24">موبایل</th>
+                <th className="py-3 px-24">نقش</th>
+                <th className="py-3 px-8">عملیات</th>
                 <th className="py-3 px-3 rounded-l-xl">وضعیت</th>
               </tr>
             </thead>
             <tbody>
-              {fakeNews.map((news, index) => (
+              {users.map((user, index) => (
                 <tr
-                  key={index}
+                  key={user.id}
                   className={`${
                     index % 2 === 0 ? "bg-white" : "bg-red-50"
                   } text-gray-700 first:[&_td]:rounded-r-[10px] last:[&_td]:rounded-l-[10px]`}
                 >
-                  <td className="py-3 px-4">{news.id}</td>
-                  <td className="py-3 px-12 text-right">{news.title}</td>
-                  <td className="py-3 px-24 text-center">{news.category}</td>
-                  <td className="py-3 px-4 text-center">{news.date}</td>
+                  <td className="py-3 px-4">{user.id}</td>
+                  <td className="py-3 px-12 text-right">{user.title}</td>
+                  <td className="py-3 px-24 text-center">{user.category}</td>
+                  <td className="py-3 px-4 text-center">{user.date}</td>
                   <td className="py-3 px-7 mr-4 text-center flex gap-8">
-                    <button onClick={() => openRoleModal(news)}>
+                    <button onClick={() => openRoleModal(user)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Edit"
-                        className="w-5 h-5 inline"
+                        className="w-5 h-5"
                       />
                     </button>
-                    <button onClick={() => openBlockModal(news)}>
+                    <button onClick={() => openBlockModal(user)}>
                       <img
                         src="/icons/slash.svg"
                         alt="Block"
-                        className="w-5 h-5 inline"
+                        className="w-5 h-5"
                       />
                     </button>
                   </td>
                   <td className="py-3 px-3 text-center">
-                    {news.status ? (
+                    {user.status ? (
                       <img
                         src="/icons/tick.svg"
                         alt="Active"
-                        className="w-5 h-5 inline"
+                        className="w-5 h-5"
                       />
                     ) : (
                       <img
                         src="/icons/close.svg"
                         alt="Inactive"
-                        className="w-5 h-5 inline"
+                        className="w-5 h-5"
                       />
                     )}
                   </td>
