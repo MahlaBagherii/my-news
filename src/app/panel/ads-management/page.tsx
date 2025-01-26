@@ -19,21 +19,21 @@ const Page = () => {
   const fakeNews: AdItem[] = [
     {
       id: 1,
-      title: "juju",
+      title: "بنر صفحه اصلی 1",
       category: "1402/08/30",
       date: "1402/08/30",
       status: true
     },
     {
-      id: 11,
-      title: "Marya",
+      id: 2,
+      title: "بنر صفحه اصلی 2",
       category: "1402/08/30",
       date: "1383/10/12",
       status: false
     },
     {
       id: 3,
-      title: "pishi",
+      title: "بنر صفحه اصلی 3",
       category: "1402/08/30",
       date: "1383/04/13",
       status: true

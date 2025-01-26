@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DeleteModal from "../../../container/DeleteNotification";
+import { mock } from "node:test";
+import { mockdata } from "./mock";
 
 interface NewsItem {
   id: number;
@@ -14,32 +16,24 @@ interface NewsItem {
 
 const Dashboard = () => {
   const router = useRouter();
+  const [newsList, setNewsList] = useState<NewsItem>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
 
-  const fakeNews: NewsItem[] = [
-    {
-      id: 1,
-      title: "پیشرفت تیم ملی در مسابقات آسیایی",
-      category: "ورزشی",
-      date: "1402/08/30",
-      status: true
-    },
-    {
-      id: 11,
-      title: "Marya",
-      category: "گوربا",
-      date: "1383/10/12",
-      status: false
-    },
-    {
-      id: 3,
-      title: "pishi",
-      category: "batman",
-      date: "1383/04/13",
-      status: true
-    }
-  ];
+  // useEffect(() => {
+  //   const fetchNews = async () => {
+  //     try {
+  //       const response = await fetch("https://grs.pythonanywhere.com/news/1/");
+  //       const data = await response.json();
+  //       console.log(data, "lll");
+  //       setNewsList(data);
+  //     } catch (error) {
+  //       console.error("Error fetching news:", error);
+  //     }
+  //   };
+
+  //   fetchNews();
+  // }, []);
 
   const handleAddNews = () => {
     router.push("/panel/add-news");
@@ -51,6 +45,7 @@ const Dashboard = () => {
   };
 
   const handleConfirmDelete = () => {
+    setNewsList((prev) => prev.filter((news) => news.id !== selectedNewsId));
     setShowModal(false);
     setSelectedNewsId(null);
   };
@@ -91,28 +86,28 @@ const Dashboard = () => {
               <p className="py-3 px-3 text-right mr-[50px]">وضعیت</p>
             </div>
             <div>
-              {fakeNews.map((news) => (
+              {mockdata.map((item, index) => (
                 <div
-                  key={news.id}
+                  key={index}
                   className="even:bg-red-50 rounded-md w-full flex"
                 >
-                  <p className="py-3 px-4 text-right w-[20px]">{news.id}</p>
+                  <p className="py-3 px-4 text-right w-[20px]">{item.id}</p>
                   <p className="py-3 px-24 text-right w-[380px] mr-[100px] text-nowrap">
-                    {news.title}
+                    {item.title}
                   </p>
                   <p className="py-3 px-4 text-right w-[140px] flex justify-center">
-                    {news.category}
+                    {item.category}
                   </p>
-                  <p className="py-3 px-4 text-right">{news.date}</p>
+                  <p className="py-3 px-4 text-right">{item.date}</p>
                   <div className="py-3 px-4 text-right w-[150px] flex justify-around">
-                    <button onClick={() => handleEditClick(news.id)}>
+                    <button onClick={() => handleEditClick(item.id)}>
                       <img
                         src="/icons/edit.svg"
                         alt="Edit"
                         className="w-5 h-5 inline"
                       />
                     </button>
-                    <button onClick={() => handleDeleteClick(news.id)}>
+                    <button onClick={() => handleDeleteClick(item.id)}>
                       <img
                         src="/icons/trash.svg"
                         alt="Delete"
@@ -121,7 +116,7 @@ const Dashboard = () => {
                     </button>
                   </div>
                   <p className="py-3 px-3 text-right flex justify-center w-[120px]">
-                    {news.status ? (
+                    {item.status ? (
                       <img
                         src="/icons/tick.svg"
                         alt="Active"
@@ -137,6 +132,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               ))}
+              {/* {newsList.status} */}
             </div>
           </div>
         </div>
