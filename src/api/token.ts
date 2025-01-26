@@ -9,17 +9,14 @@ const token = async (username: string, password: string) => {
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
-          "X-CSRFTOKEN": "Z0lq0t32KBawcjyIfV4mhibVi70GhPtL",
-        },
+          "X-CSRFTOKEN": "Z0lq0t32KBawcjyIfV4mhibVi70GhPtL"
+        }
       }
     );
 
-    return response.data; // بازگشت داده‌های پاسخ سرور
+    return response.data;
   } catch (error: any) {
-    console.error(
-      "Error:",
-      error.response?.data || error.message // نمایش خطای دریافت‌شده از سرور
-    );
+    console.error("Error:", error.response?.data || error.message);
     throw error;
   }
 };

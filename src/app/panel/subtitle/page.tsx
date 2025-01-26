@@ -25,14 +25,14 @@ const Page = () => {
     },
     {
       id: 2,
-      title: "Marya",
-      category: "grs",
+      title: "پیشرفت تیم ملی در مسابقات آسیایی",
+      category: "سیاسی",
       date: "1383/10/12"
     },
     {
       id: 3,
-      title: "pishi",
-      category: "batman",
+      title: "پیشرفت تیم ملی در مسابقات آسیایی",
+      category: "ورزشی",
       date: "1383/04/13"
     }
   ];

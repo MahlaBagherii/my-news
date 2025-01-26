@@ -2,17 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import TextEditor from "../../../container/TextEditor";
-
-interface NewsItem {
-  id: number;
-  title: string;
-  category: string;
-  shortDescription: string;
-  date: string;
-  keywords: string;
-  status: boolean;
-}
 
 interface FormData {
   title: string;
@@ -22,27 +13,6 @@ interface FormData {
   status: boolean;
   content: string;
 }
-
-const fakeNews: NewsItem[] = [
-  {
-    id: 1,
-    title: "پیشرفت تیم ملی در مسابقات آسیایی",
-    category: "ورزشی",
-    shortDescription: "توضیحات کوتاه درباره خبر ورزشی",
-    date: "1402/08/30",
-    keywords: "ورزش, تیم ملی, بازی‌ها",
-    status: true
-  },
-  {
-    id: 11,
-    title: "Marya",
-    category: "گوربا",
-    shortDescription: "توضیحات کوتاه درباره گوربا",
-    date: "1383/10/12",
-    keywords: "گوربا, Marya",
-    status: false
-  }
-];
 
 export default function AddNews() {
   const searchParams = useSearchParams();
@@ -59,17 +29,22 @@ export default function AddNews() {
 
   useEffect(() => {
     if (id) {
-      const newsItem = fakeNews.find((news) => news.id === parseInt(id));
-      if (newsItem) {
-        setFormData({
-          title: newsItem.title,
-          shortDescription: newsItem.shortDescription || "",
-          category: newsItem.category || "",
-          keywords: newsItem.keywords || "",
-          status: newsItem.status || false,
-          content: ""
+      axios
+        .get(`https://grs.pythonanywhere.com/news/${id}/`)
+        .then((response) => {
+          const newsItem = response.data;
+          setFormData({
+            title: newsItem.title,
+            shortDescription: newsItem.shortDescription || "",
+            category: newsItem.category || "",
+            keywords: newsItem.keywords || "",
+            status: newsItem.status || false,
+            content: newsItem.content || ""
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching news item:", error);
         });
-      }
     }
   }, [id]);
 
@@ -80,7 +55,32 @@ export default function AddNews() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSave = () => {};
+  const handleSave = async () => {
+    try {
+      const response = await axios.post(
+        "https://grs.pythonanywhere.com/news/create/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      console.log("News created successfully:", response.data);
+      alert("خبر با موفقیت ثبت شد.");
+      setFormData({
+        title: "",
+        shortDescription: "",
+        category: "",
+        keywords: "",
+        status: false,
+        content: ""
+      });
+    } catch (error) {
+      console.error("Error creating news:", error);
+      alert("مشکلی در ثبت خبر وجود دارد. لطفاً دوباره تلاش کنید.");
+    }
+  };
 
   return (
     <div className="bg-white rounded-[20px]">
@@ -206,12 +206,20 @@ export default function AddNews() {
           </label>
           <input
             type="text"
+            name="keywords"
+            value={formData.keywords}
+            onChange={handleChange}
             className="w-[660px] h-[50px] ml-[48px] rounded-[5px] border border-gray-200 bg-[#FAFAFA] px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <div className="flex items-center gap-2">
             <input
               id="confirm-checkbox"
               type="checkbox"
+              name="status"
+              checked={formData.status}
+              onChange={(e) =>
+                setFormData({ ...formData, status: e.target.checked })
+              }
               className="w-4 h-4 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
             />
             <label htmlFor="confirm-checkbox" className="text-sm text-gray-700">

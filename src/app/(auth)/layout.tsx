@@ -25,7 +25,7 @@ export default function layout({ children }) {
         </div>
       </div>
       <div className="flex-1 flex items-center justify-center p-8 md:p-0"></div>
-      <div className="w-[65%] h-full flex justify-center items-center">
+      <div className="w-[65%] h-full flex justify-center items-center bg-white">
         {children}
       </div>
     </div>
