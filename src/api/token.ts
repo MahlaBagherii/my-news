@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
+const route = useRouter();
 const token = async (username: string, password: string) => {
   try {
     const response = await axios.post(
@@ -14,7 +15,12 @@ const token = async (username: string, password: string) => {
       }
     );
 
-    return response.data;
+    // return response.data;
+    // if (response.data.roled === "admin") {
+    //   route.push("/");
+    // } else {
+    //   route.push("/");
+    // }
   } catch (error: any) {
     console.error("Error:", error.response?.data || error.message);
     throw error;

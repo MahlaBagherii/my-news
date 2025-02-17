@@ -20,20 +20,20 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
 
-  // useEffect(() => {
-  //   const fetchNews = async () => {
-  //     try {
-  //       const response = await fetch("https://grs.pythonanywhere.com/news/1/");
-  //       const data = await response.json();
-  //       console.log(data, "lll");
-  //       setNewsList(data);
-  //     } catch (error) {
-  //       console.error("Error fetching news:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch("https://grs.pythonanywhere.com/news/1");
+        const data = await response.json();
+        console.log(data, "lll");
+        setNewsList(data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    };
 
-  //   fetchNews();
-  // }, []);
+    fetchNews();
+  }, []);
 
   const handleAddNews = () => {
     router.push("/panel/add-news");
