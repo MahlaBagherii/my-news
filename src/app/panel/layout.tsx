@@ -15,8 +15,9 @@ const layout = ({ children }) => {
         </div>
 
           <div className="bg-white rounded-[20px] p-4 overflow-y-auto">
-            <div>{children}</div>
-            <MainLayout />
+          <MainLayout>
+          {children}
+        </MainLayout>
           </div>
       </div>
     </div>
