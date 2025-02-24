@@ -14,11 +14,9 @@ const layout = ({ children }) => {
           <Topbar />
         </div>
 
-          <div className="bg-white rounded-[20px] p-4 overflow-y-auto">
-          <MainLayout>
-          {children}
-        </MainLayout>
-          </div>
+        <div className="bg-white rounded-[20px] p-4 overflow-y-auto">
+          <MainLayout>{children}</MainLayout>
+        </div>
       </div>
     </div>
   );

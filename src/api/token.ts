@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
-const route = useRouter();
-const token = async (username: string, password: string) => {
+
+const token = async (
+  username: string,
+  password: string
+): Promise<{ access?: string; roled?: string } | null> => {
   try {
     const response = await axios.post(
       "https://grs.pythonanywhere.com/token/",
@@ -15,15 +18,10 @@ const token = async (username: string, password: string) => {
       }
     );
 
-    // return response.data;
-    // if (response.data.roled === "admin") {
-    //   route.push("/");
-    // } else {
-    //   route.push("/");
-    // }
+    return response.data;
   } catch (error: any) {
     console.error("Error:", error.response?.data || error.message);
-    throw error;
+    return null;
   }
 };
 
