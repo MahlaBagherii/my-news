@@ -11,7 +11,7 @@ const LoginForm: React.FC = () => {
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (username && password) {
       try {

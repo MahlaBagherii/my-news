@@ -2,7 +2,7 @@ import Sidebar from "../../components/Sidebar";
 import Topbar from "../../components/Topbar";
 import MainLayout from "../../components/MainLayout";
 
-const layout = ({ children }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex w-full h-screen bg-[#F2F2F2] overflow-hidden">
       <div className="w-[18%] h-full">
@@ -10,16 +10,14 @@ const layout = ({ children }) => {
       </div>
 
       <div className="flex flex-col w-[82%] px-4 py-4">
-        <div className="h-[300px] w-full  ">
+        <div className="h-[300px] w-full">
           <Topbar />
         </div>
 
-        <div className="bg-white rounded-[20px] p-4 overflow-y-auto">
-          <MainLayout>{children}</MainLayout>
-        </div>
+        <MainLayout>{children}</MainLayout>
       </div>
     </div>
   );
 };
 
-export default layout;
+export default Layout;
