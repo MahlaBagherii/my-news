@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import DeleteModal from "../../../container/DeleteNotification";
-import { mock } from "node:test";
 import { mockdata } from "./mock";
 
 interface NewsItem {
@@ -16,7 +15,7 @@ interface NewsItem {
 
 const Dashboard = () => {
   const router = useRouter();
-  const [newsList, setNewsList] = useState<NewsItem>([]);
+  const [newsList, setNewsList] = useState<NewsItem[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedNewsId, setSelectedNewsId] = useState<number | null>(null);
 
@@ -56,6 +55,7 @@ const Dashboard = () => {
   };
 
   const handleEditClick = (id: number) => {
+    // استفاده صحیح از template literal
     router.push(`/panel/add-news?id=${id}`);
   };
 
@@ -132,7 +132,6 @@ const Dashboard = () => {
                   </p>
                 </div>
               ))}
-              {/* {newsList.status} */}
             </div>
           </div>
         </div>
